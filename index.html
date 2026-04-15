@@ -638,7 +638,7 @@ let busy = false;
 // INIT
 // ────────────────────────────────────────────────────────────
 
-document.addEventListener('DOMContentLoaded', () => {
+function init() {
   renderPersonas();
   renderTopics();
 
@@ -663,7 +663,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   refresh();
-});
+}
+
+// Script is at bottom of body so DOM is ready — call immediately.
+// DOMContentLoaded as belt-and-suspenders fallback.
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 
 // ────────────────────────────────────────────────────────────
 // BUSINESS CONTEXT
