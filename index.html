@@ -467,6 +467,11 @@
             <div class="s-info"><div class="s-name">The PLG Growth Studio</div><div class="s-role">Product-Led Growth</div></div>
             <div class="s-cb" id="cb-plg_studio"></div>
           </div>
+          <div class="s-item" id="si-vc_operator" onclick="toggleS('vc_operator')">
+            <div class="s-av" style="background:#1A8754">VC</div>
+            <div class="s-info"><div class="s-name">The VC-Backed Operator</div><div class="s-role">Scale &amp; Unit Economics</div></div>
+            <div class="s-cb" id="cb-vc_operator"></div>
+          </div>
           <div class="s-item" id="si-demand_gen_agency" onclick="toggleS('demand_gen_agency')">
             <div class="s-av" style="background:#7B2FBE">DG</div>
             <div class="s-info"><div class="s-name">The Demand Gen Agency</div><div class="s-role">Paid &amp; Content Distribution</div></div>
@@ -476,41 +481,6 @@
             <div class="s-av" style="background:#3B7DD8">PS</div>
             <div class="s-info"><div class="s-name">The SaaS Pricing Specialist</div><div class="s-role">Monetisation &amp; Packaging</div></div>
             <div class="s-cb" id="cb-pricing_specialist"></div>
-          </div>
-          <div class="s-item" id="si-abm_consultancy" onclick="toggleS('abm_consultancy')">
-            <div class="s-av" style="background:#2D6CDF">AB</div>
-            <div class="s-info"><div class="s-name">The ABM Consultancy</div><div class="s-role">Account-Based Marketing</div></div>
-            <div class="s-cb" id="cb-abm_consultancy"></div>
-          </div>
-          <div class="s-item" id="si-revenue_architect" onclick="toggleS('revenue_architect')">
-            <div class="s-av" style="background:#2E7D32">RA</div>
-            <div class="s-info"><div class="s-name">The Revenue Architect</div><div class="s-role">Sales Process &amp; CRM</div></div>
-            <div class="s-cb" id="cb-revenue_architect"></div>
-          </div>
-          <div class="s-item" id="si-vc_operator" onclick="toggleS('vc_operator')">
-            <div class="s-av" style="background:#1A8754">VC</div>
-            <div class="s-info"><div class="s-name">The VC-Backed Operator</div><div class="s-role">Scale &amp; Unit Economics</div></div>
-            <div class="s-cb" id="cb-vc_operator"></div>
-          </div>
-          <div class="s-item" id="si-channel_partner" onclick="toggleS('channel_partner')">
-            <div class="s-av" style="background:#0A7E8C">CP</div>
-            <div class="s-info"><div class="s-name">The Channel &amp; Partner Specialist</div><div class="s-role">Indirect GTM</div></div>
-            <div class="s-cb" id="cb-channel_partner"></div>
-          </div>
-          <div class="s-item" id="si-community_builder" onclick="toggleS('community_builder')">
-            <div class="s-av" style="background:#7C5CBF">CB</div>
-            <div class="s-info"><div class="s-name">The Community-Led Growth Expert</div><div class="s-role">Bottoms-Up Adoption</div></div>
-            <div class="s-cb" id="cb-community_builder"></div>
-          </div>
-          <div class="s-item" id="si-field_sales_director" onclick="toggleS('field_sales_director')">
-            <div class="s-av" style="background:#8B6914">FS</div>
-            <div class="s-info"><div class="s-name">The Enterprise Field Sales Director</div><div class="s-role">Complex B2B Sales</div></div>
-            <div class="s-cb" id="cb-field_sales_director"></div>
-          </div>
-          <div class="s-item" id="si-analyst_advisor" onclick="toggleS('analyst_advisor')">
-            <div class="s-av" style="background:#6B21A8">IA</div>
-            <div class="s-info"><div class="s-name">The Industry Analyst</div><div class="s-role">Market Framing &amp; Analyst Relations</div></div>
-            <div class="s-cb" id="cb-analyst_advisor"></div>
           </div>
         </div>
       </div>
@@ -583,102 +553,79 @@
 // PERSONAS
 // ────────────────────────────────────────────────────────────
 
+// Personas sourced from gtm-fishbowl-personas.md
 const PERSONAS = [
   {
     id: 'positioning_consultant',
     name: 'The Positioning Consultant',
     initials: 'PC', color: '#E8443A',
     specialty: 'Messaging & Market Fit',
-    bias: `Always starts by asking: "What do buyers use instead of you?" Believes niche positioning beats broad messaging. Champions owning a specific category. The core conviction: if the positioning is wrong, nothing else works — not outbound, not PLG, not paid. Will challenge anyone who leads with features or uses generic category language like "AI platform" or "enterprise software."`,
-    method: `1. Map the competitive alternatives (what buyers actually do instead). 2. Identify the unique attributes only you have against those alternatives. 3. Name the value those attributes deliver. 4. Define who cares most. 5. Name the category you want to own. Never build a sales motion before positioning is locked.`,
+    description: `A boutique strategy consultancy that has spent years helping B2B companies escape commodity positioning and own a defensible category. They work upstream of everything else — before campaigns, before sales scripts, before pricing. Their core belief is that most GTM failures are actually positioning failures in disguise.`,
+    methodology: `Starts every engagement with a competitive alternative audit: "What does the customer do if you don't exist?" Uses the "best for" framework. Believes feature lists are poison — benefits must be expressed as outcomes in the customer's language. Insists on a single, provable point of differentiation before any sales or marketing motion begins. Recommends messaging tests on LinkedIn and cold email before any brand investment.`,
+    arguments: `"You don't have a demand problem, you have a positioning problem." / "If your message works for your three closest competitors, it's not positioning — it's category description." / "Before we talk channels, tell me exactly who this is NOT for." / "Your ICP is too broad. Narrow it until it feels uncomfortably small, then narrow it again."`,
+    pushback: `Challenges the PLG Studio when product virality is assumed before product-market fit is proven. Challenges the Outbound Agency when sequences are built around features instead of outcomes. Challenges the VC Operator when "TAM expansion" is used to justify vague messaging.`,
+    blindspots: `Can over-index on strategy and delay execution. Tends to underweight distribution. May be too academic for operators who need pipeline in 90 days.`,
+    debatePosture: `Methodical, Socratic, slightly contrarian. Slows the debate down. Forces others to define their terms. Will say "that's a symptom, not a cause" more than once. Speaks as "we" — the firm.`,
   },
   {
     id: 'outbound_agency',
     name: 'The Outbound Sales Agency',
     initials: 'OA', color: '#D4A017',
     specialty: 'Cold Outreach & Pipeline',
-    bias: `Always starts by asking: "Do you have a list, and does your sequence have a hypothesis?" Champions multi-touch outreach: email + LinkedIn + phone in a structured cadence. Believes ICP precision is the single biggest lever on outbound ROI. Skeptical of inbound-only strategies for early-stage companies. Tracks everything: reply rate, meeting rate, cost per booked meeting.`,
-    method: `1. Define ICP with 5 firmographic and 2 trigger-based filters. 2. Build a targeted list of 200–500 named accounts. 3. Write a 6-step sequence (3 email + 2 LinkedIn + 1 call) with a clear hypothesis per step. 4. Measure reply rate (target: 8%+) and meeting rate (target: 2%+). 5. Kill or iterate sequences at 100 contacts.`,
+    description: `A specialist B2B outbound agency that has run thousands of cold outreach campaigns across SaaS, industrial, and professional services verticals. Ruthlessly pragmatic — their KPI is booked meetings, not brand awareness. They believe the fastest path to revenue validation is a well-built sequence hitting the right title at the right company.`,
+    methodology: `Starts with a tightly defined ICP: industry, company size, tech stack signals, hiring signals, trigger events. Builds multi-channel sequences: cold email → LinkedIn connect → LinkedIn DM → phone. Obsesses over first-line personalisation and subject line open rates. Advocates for A/B testing messaging in outbound before investing in inbound. Believes the first 50 booked meetings are the best market research a startup can buy.`,
+    arguments: `"Don't build inbound until outbound has proven your ICP." / "You need 10 conversations a week minimum to have enough signal." / "LinkedIn alone isn't outbound — you need email in the mix or you're leaving 60% of responses on the table." / "Trigger-based prospecting is 3× more effective than static lists."`,
+    pushback: `Challenges PLG Studio: "PLG works at scale — you don't have scale yet." Challenges Demand Gen Agency: "Content takes 12 months to compound. You need pipeline in 12 weeks." Challenges Positioning Consultant: "We test positioning in sequences. We don't need 6 weeks of workshops to start."`,
+    blindspots: `Outbound economics deteriorate fast as you move upmarket. Can create pipeline that looks healthy but has low conversion if ICP discipline slips. Sequences can damage brand if not well-crafted.`,
+    debatePosture: `Fast, direct, data-driven. Talks in conversion rates and sequence metrics. Impatient with abstract strategy. Will bring the conversation back to "what's the meeting booking rate?" regularly. Speaks as "we" — the agency.`,
   },
   {
     id: 'plg_studio',
     name: 'The PLG Growth Studio',
     initials: 'PG', color: '#C73866',
     specialty: 'Product-Led Growth',
-    bias: `Always asks: "Can a user get value in under 5 minutes without talking to sales?" Believes the product should be the primary acquisition channel. Champions freemium, trials, and self-serve onboarding. Skeptical of pure sales-led motions for products that could have viral loops. Core conviction: if setup takes more than a day, you've already lost the PLG bet.`,
-    method: `1. Define the "aha moment" — the exact in-product event that predicts retention. 2. Build a self-serve path to that moment in under 5 minutes. 3. Instrument activation with a single leading metric. 4. Create a freemium or trial tier that lets end users try before IT approves. 5. Use product usage data as the lead scoring signal for sales.`,
-  },
-  {
-    id: 'demand_gen_agency',
-    name: 'The Demand Gen Agency',
-    initials: 'DG', color: '#7B2FBE',
-    specialty: 'Paid & Content Distribution',
-    bias: `Champions building demand before capturing it. Believes buyers make 70% of their decision before talking to sales — so the brand needs to be present during that dark period. Pushes LinkedIn thought leadership, SEO, and targeted paid channels. Anti-gating content. Tracks pipeline influenced, not MQLs. Will challenge anyone still running gated whitepapers or measuring lead volume.`,
-    method: `1. Map where your ICP spends time online (LinkedIn, industry forums, newsletters). 2. Build an ungated content engine (2 posts/week minimum). 3. Run LinkedIn thought leadership from the founder's personal account. 4. Use retargeting to stay in front of ICP who engaged. 5. Measure pipeline influenced by content, not lead counts.`,
-  },
-  {
-    id: 'pricing_specialist',
-    name: 'The SaaS Pricing Specialist',
-    initials: 'PS', color: '#3B7DD8',
-    specialty: 'Monetisation & Packaging',
-    bias: `Obsessed with the value metric — the unit that scales with customer value. Always asks: "What expands when your customer gets more value?" Believes pricing communicates positioning. Champions usage-based and tiered pricing over flat per-seat models. Will challenge anyone pricing like a tool when they should price like infrastructure. Core conviction: wrong pricing model kills expansion revenue.`,
-    method: `1. Identify the value metric (the thing that scales with customer success). 2. Test 3 pricing hypotheses with real prospects before committing. 3. Build 3 tiers with clear upgrade triggers built into the product. 4. Anchor pricing to the cost of the problem, not the cost of the solution. 5. Design expansion revenue into the product — don't rely on sales to upsell.`,
-  },
-  {
-    id: 'abm_consultancy',
-    name: 'The ABM Consultancy',
-    initials: 'AB', color: '#2D6CDF',
-    specialty: 'Account-Based Marketing',
-    bias: `Believes precision beats volume every time. Always asks: "Which 50 accounts matter most, and do all three stakeholders at each account know your name?" Champions named account targeting, multi-threaded engagement, and long-game relationship orchestration. Skeptical of spray-and-pray outbound. Core conviction: in a small TAM, every wasted impression is a missed relationship.`,
-    method: `1. Define a Tier 1 target account list of 50 named accounts. 2. Map the buying committee at each account (economic buyer, champion, blocker). 3. Build personalised outreach for each stakeholder role, not just the title. 4. Orchestrate across email, LinkedIn, events, and direct mail. 5. Measure account engagement score and pipeline coverage per account.`,
-  },
-  {
-    id: 'revenue_architect',
-    name: 'The Revenue Architect',
-    initials: 'RA', color: '#2E7D32',
-    specialty: 'Sales Process & CRM',
-    bias: `Designs systems before hiring people. Always asks: "What does your bowtie look like, and where does the leakage happen?" Believes the biggest GTM mistake is building a team before building a repeatable process. Champions pipeline stage definition, CRM hygiene, and expansion revenue design. Will challenge anyone who tracks activity metrics instead of conversion metrics.`,
-    method: `1. Define the bowtie: Acquisition → Onboarding → Retention → Expansion — with metrics at each stage. 2. Map pipeline stages with entry/exit criteria. 3. Build CRM discipline before hiring the first rep. 4. Design the expansion trigger into the customer journey — not into the sales process. 5. Review conversion rates weekly, not activity counts.`,
+    description: `A growth consultancy that specialises in making the product itself the primary acquisition, conversion, and expansion engine. They believe the best salespeople are product experiences — frictionless onboarding, instant time-to-value, and viral collaboration features.`,
+    methodology: `Designs around the "aha moment" — the specific in-product moment where the user first understands the value. Advocates for a free tier or trial as top of funnel. Optimises activation rates, not just signups. Builds expansion revenue into the product: seat-based, usage-based, or feature-gated upgrades. Uses product usage data to trigger sales conversations (PQLs) rather than MQL-based handoffs.`,
+    arguments: `"If you need a salesperson to explain why someone should use your product, your onboarding is broken." / "The best demos are live product experiences, not slide decks." / "Usage-based pricing aligns your revenue model with your customer's success." / "Viral loops built into the product are your cheapest CAC."`,
+    pushback: `Challenges Outbound Agency: "You're paying for conversations. We're building a machine that generates intent." Challenges Enterprise Field Sales: "Bottoms-up beats top-down in the long run." Challenges Pricing Specialist: "Don't gate too early — free-to-paid conversion compounds."`,
+    blindspots: `PLG requires a genuinely self-explanatory product. Complex B2B products with configuration or compliance requirements often can't go fully self-serve. Time-to-PLG-maturity is long — may not generate meaningful pipeline inside 6 months.`,
+    debatePosture: `Enthusiastic, systems-thinking, product-first. Uses frameworks like "activation funnel" and "expansion loops." Occasionally disconnected from the reality of buyers who don't want to self-serve. Speaks as "we" — the studio.`,
   },
   {
     id: 'vc_operator',
     name: 'The VC-Backed Operator',
     initials: 'VC', color: '#1A8754',
     specialty: 'Scale & Unit Economics',
-    bias: `Unit economics above all else. Always asks: "What's your CAC payback period, and can a new hire replicate your close rate in 6 months?" Champions proving GTM-Fit before pouring fuel on the fire. Premature scaling is the #1 killer of good startups. Believes in founder-led sales until €1M ARR, then methodical hiring. Will challenge anyone who wants to scale before the model is proven.`,
-    method: `1. Track CAC payback monthly — must be under 18 months before scaling. 2. Prove the motion works with 20+ closed deals before hiring a rep. 3. Define the scaling gate: the exact metrics that must be hit before each hire. 4. Document every sales conversation — objections, timeline, stakeholders. 5. Don't raise for GTM until you can show a predictable unit economics model.`,
+    description: `A former operator who has scaled two or three venture-backed B2B SaaS companies and now advises early-stage startups. Has sat in both the founder seat and the board room. Obsesses over unit economics — not because they're cold, but because they've seen too many companies run exciting GTM motions that were economically unviable at scale. They think in payback periods, not growth rates.`,
+    methodology: `Insists on knowing CAC before recommending any GTM motion. LTV:CAC ratio of 3:1+ is the minimum threshold before scaling any channel. Advocates for a "one repeatable motion" rule. Believes in cohort analysis: are customers retained, expanded, and advocated? Pushes for payback period under 18 months for early-stage SaaS.`,
+    arguments: `"Show me the cohort retention before we talk about scaling acquisition." / "Founder-led sales is the best GTM you'll ever have. The question is when to systematise it." / "What's your payback period on that outbound sequence? If you don't know, you're flying blind." / "Don't hire a VP of Sales to fix a positioning problem."`,
+    pushback: `Challenges Demand Gen Agency: "Content marketing CAC is real — count the headcount and time cost before calling it cheap." Challenges PLG Studio: "Free users don't pay — show me free-to-paid conversion rate." Challenges Outbound Agency: "You want to hire SDRs before you've proven the message works."`,
+    blindspots: `Can be overly conservative at the stage where some bets need to be made on incomplete data. Unit economics thinking can stifle brand investments with long payback but outsized returns.`,
+    debatePosture: `Calm, rigorous, data-demanding. The voice of financial discipline in the room. Will ask "what do the unit economics look like?" before endorsing any channel. Speaks as "we" — the operator perspective.`,
   },
   {
-    id: 'channel_partner',
-    name: 'The Channel & Partner Specialist',
-    initials: 'CP', color: '#0A7E8C',
-    specialty: 'Indirect GTM',
-    bias: `Believes indirect GTM beats direct at scale in mature markets. Always asks: "Who already has your buyer's trust and sees them every quarter?" Champions resellers, system integrators, technology partners, and ecosystem plays. Will challenge anyone who assumes direct sales is the only path. Core conviction: the best lead is a warm introduction from a trusted advisor.`,
-    method: `1. Map the ecosystem: who else sells to your ICP and isn't a competitor? 2. Identify 3–5 potential referral partners and test with a 90-day pilot. 3. Build a co-sell playbook with clear rules of engagement. 4. Make it easy: give partners a one-pager, a demo script, and a deal registration process. 5. Measure: referrals per partner per quarter, and partner-sourced pipeline %.`,
+    id: 'demand_gen_agency',
+    name: 'The Demand Gen Agency',
+    initials: 'DG', color: '#7B2FBE',
+    specialty: 'Paid & Content Distribution',
+    description: `A specialist B2B demand generation agency that builds pipeline through content, LinkedIn, SEO, paid media, and nurture programs. They believe sustainable growth comes from building an audience that comes to you, not one you have to chase. The long-game counterweight to outbound thinking.`,
+    methodology: `Builds content engines: thought leadership, case studies, SEO articles, video, newsletters. LinkedIn is the primary organic B2B channel. Designs lead nurture sequences that move cold prospects to warm intent over weeks. Uses intent data (Bombora, G2, LinkedIn signals) to identify in-market accounts. Believes brand is a moat: awareness compounds, cold outreach does not.`,
+    arguments: `"Every cold email performs 3× better if the prospect has seen your brand twice already." / "Your ICP is on LinkedIn every day — the question is whether they see your point of view." / "Content is the only GTM motion that gets cheaper over time." / "Dark funnel activity drives 40–60% of pipeline that never shows in your attribution model."`,
+    pushback: `Challenges Outbound Agency: "You're renting attention. We're building an asset." Challenges VC Operator: "You can't measure a 12-month compounding engine on a 90-day payback window." Challenges Positioning Consultant: "Positioning is only valuable if it's distributed. A perfect message no one sees is a philosophy, not a strategy."`,
+    blindspots: `Content-led demand gen has a 6–12 month ramp before meaningful pipeline. Requires strong editorial discipline most early-stage teams underestimate. B2B demand gen playbooks don't always translate to industrial or offline-first buyers.`,
+    debatePosture: `Creative but rigorous. Talks in audience-building, content calendars, and dark funnel theory. Frustrated when conversations reduce to "what's the fastest path to pipeline." Advocates for patience in rooms that don't have it. Speaks as "we" — the agency.`,
   },
   {
-    id: 'community_builder',
-    name: 'The Community-Led Growth Expert',
-    initials: 'CB', color: '#7C5CBF',
-    specialty: 'Bottoms-Up Adoption',
-    bias: `Believes word-of-mouth and champion networks beat any paid channel in tight-knit industries. Always asks: "Who are your 10 most passionate users, and what would make them talk about you?" Champions bottom-up adoption, user communities, and reference-selling. Will challenge anyone who leads with top-down sales without building grassroots champions first.`,
-    method: `1. Identify the 10 most engaged customers and make them VIP advisors. 2. Create a community space (Slack group, LinkedIn group, or forum) for your ICP. 3. Give champions a reason to talk — early access, co-creation, public recognition. 4. Build a customer reference program with 5 referenceable customers before scaling sales. 5. Measure: community-sourced leads, NPS, and referral rate.`,
-  },
-  {
-    id: 'field_sales_director',
-    name: 'The Enterprise Field Sales Director',
-    initials: 'FS', color: '#8B6914',
-    specialty: 'Complex B2B Sales',
-    bias: `30-year veteran of complex, multi-stakeholder sales. Always asks: "Who is the economic buyer, and do you have a champion with power?" Believes enterprise deals die in the buying committee, not in the pitch. Champions multi-threading, procurement navigation, and executive alignment. Will challenge anyone who pitches to the champion without mapping the full buying committee.`,
-    method: `1. Map the full buying committee: Economic Buyer, Champion, Technical Evaluator, Blocker. 2. Qualify hard on MEDDIC or SPICED — exit fast if there's no champion with power. 3. Build the business case for the economic buyer — not the feature list. 4. Multi-thread from day one — never rely on a single point of contact. 5. Nail the mutual action plan: both sides own next steps.`,
-  },
-  {
-    id: 'analyst_advisor',
-    name: 'The Industry Analyst',
-    initials: 'IA', color: '#6B21A8',
-    specialty: 'Market Framing & Analyst Relations',
-    bias: `Believes category creation is the ultimate GTM moat — own the frame and you own the market. Always asks: "How does your product fit into the analyst narrative, and are you defining the category or being defined by it?" Champions Gartner/Forrester positioning, thought leadership, and the power of being the company that invented the category name buyers search for.`,
-    method: `1. Research whether your category already exists in analyst reports (Gartner, Forrester, G2). 2. If not, write the category definition yourself — publish it, speak it, live it. 3. Build relationships with 2–3 relevant analysts before you need them. 4. Create the "market sizing" and "buyer's guide" content that analysts reference. 5. Measure: how often does your company appear in category conversations?`,
+    id: 'pricing_specialist',
+    name: 'The SaaS Pricing Specialist',
+    initials: 'PS', color: '#3B7DD8',
+    specialty: 'Monetisation & Packaging',
+    description: `A boutique consultancy that specialises exclusively in SaaS pricing strategy, packaging design, and monetisation architecture. They believe pricing is the most underleveraged strategic lever in most companies — and the one most founders get wrong by defaulting to cost-plus or copying competitors.`,
+    methodology: `Value-based pricing: anchored to economic value delivered, not cost or competitive benchmarks. Packaging design: features organised into tiers that map to buyer personas. Identifies the "value metric" — the single unit that scales with customer value. Believes the first pricing decision shapes the entire sales motion. Advocates for annual pricing and multi-year commits from day one.`,
+    arguments: `"Copying your competitor's pricing is the fastest way to compete on price." / "Your pricing page is your best salesperson — if it can't close without a discovery call, it's broken." / "You're undercharging. Almost every early-stage SaaS company is undercharging. Raise the price, watch what happens." / "A free tier without a clear upgrade trigger is charity."`,
+    pushback: `Challenges PLG Studio on free tier design: "Free is a strategy, not a default — what's the expansion trigger?" Challenges Outbound Agency: "If your reps can't quote a price on a first call, your packaging is too complex." Challenges VC Operator: "Your buyers care about ROI, not price — stop assuming price sensitivity before you've tested it."`,
+    blindspots: `Pricing expertise without deep knowledge of buyer budget cycles can produce elegant models that don't survive real deals. Can over-engineer packaging for early-stage companies that need simplicity.`,
+    debatePosture: `Confident, slightly provocative. Comes with benchmarks and examples from analogous companies. Enjoys recommending price increases and watching the room react. Speaks as "we" — the consultancy.`,
   },
 ];
 
@@ -1046,18 +993,25 @@ ${businessCtx}
 
 YOUR ROLE:
 Generate a sharp, opinionated fishbowl discussion. Each persona must:
-- Speak as their archetype, not as a generic consultant
-- Apply their specific methodology and bias to the user's actual business context
+- Speak as "we" — the firm, not an individual (e.g. "In our experience...", "We've seen this pattern...")
+- Lead with their methodology bias — their first point must reflect their core lens
+- Apply their specific methodology to the user's actual business context
 - Be specific and tactical — reference details from the business context above
 - Create genuine tension with other personas where their methodologies conflict
+- Challenge other personas by name when their recommendations conflict
 - Avoid generic advice that could apply to any company
 
 SELECTED PERSONAS:
 ${personas.map(p => `
 --- ${p.name} (id: ${p.id}, initials: ${p.initials}, color: ${p.color}) ---
 Specialty: ${p.specialty}
-Core bias: ${p.bias}
-Methodology: ${p.method}
+Role: ${p.description}
+Core Methodology: ${p.methodology}
+Characteristic Arguments: ${p.arguments}
+Where They Push Back: ${p.pushback}
+Blind Spots: ${p.blindspots}
+Debate Posture: ${p.debatePosture}
+IMPORTANT: This persona speaks as "we" — the firm, not an individual.
 `).join('\n')}
 
 RESPONSE FORMAT:
