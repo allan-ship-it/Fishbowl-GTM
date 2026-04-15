@@ -21,6 +21,33 @@
       --r: 12px;
     }
 
+    /* ── LIGHT MODE ── */
+    html.light {
+      --bg: #F5F5F3;
+      --bg2: #FFFFFF;
+      --bg3: #EBEBEA;
+      --accent: #FF5500;
+      --accent-h: #E04A00;
+      --accent-dim: rgba(255,85,0,0.08);
+      --text: #111111;
+      --muted: #555555;
+      --dim: #AAAAAA;
+      --border: #DEDEDD;
+      --bh: #CACAC8;
+    }
+
+    /* Theme toggle button */
+    .theme-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; border-radius: 8px;
+      background: var(--bg2); border: 1px solid var(--border);
+      cursor: pointer; color: var(--muted); flex-shrink: 0;
+      transition: all 0.15s;
+    }
+    .theme-btn:hover { border-color: var(--bh); color: var(--text); }
+    .theme-btn svg { transition: transform 0.3s ease; }
+    html.light .theme-btn svg { transform: rotate(180deg); }
+
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -316,7 +343,7 @@
 
     .round-badge { margin-left: auto; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dim); background: var(--bg3); padding: 3px 8px; border-radius: 100px; flex-shrink: 0; }
 
-    .s-card blockquote { font-size: 14px; line-height: 1.75; color: #DDDDDD; padding-left: 14px; border-left: 3px solid var(--accent); margin-bottom: 12px; }
+    .s-card blockquote { font-size: 14px; line-height: 1.75; color: var(--muted); padding-left: 14px; border-left: 3px solid var(--accent); margin-bottom: 12px; }
     .s-card blockquote strong { color: var(--text); }
 
     .action-box { background: var(--accent-dim); border-radius: 6px; padding: 10px 14px; font-size: 12px; font-weight: 600; color: var(--accent); }
@@ -452,6 +479,11 @@
       <p class="header-sub">Live AI debate with 6 GTM archetypes — powered by Claude</p>
     </div>
   </div>
+  <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle light/dark mode">
+    <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
   <div class="api-widget" id="apiWidget">
     <span class="api-label">API Key</span>
     <input type="password" class="api-input" id="apiKey" placeholder="sk-ant-..." autocomplete="off">
@@ -704,7 +736,29 @@ let busy = false;
 // INIT
 // ────────────────────────────────────────────────────────────
 
+function toggleTheme() {
+  const isLight = document.documentElement.classList.toggle('light');
+  localStorage.setItem('gtm-fishbowl-theme', isLight ? 'light' : 'dark');
+  updateThemeIcon(isLight);
+}
+
+function updateThemeIcon(isLight) {
+  const icon = document.getElementById('themeIcon');
+  if (!icon) return;
+  // Sun icon for light mode, moon for dark
+  icon.innerHTML = isLight
+    ? '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>'
+    : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+}
+
 function init() {
+
+  // Restore theme preference
+  const savedTheme = localStorage.getItem('gtm-fishbowl-theme');
+  if (savedTheme === 'light') {
+    document.documentElement.classList.add('light');
+    updateThemeIcon(true);
+  }
 
   // Restore API key
   const saved = localStorage.getItem('gtm-fishbowl-key');
