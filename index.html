@@ -639,8 +639,8 @@ let busy = false;
 // ────────────────────────────────────────────────────────────
 
 function init() {
-  renderPersonas();
-  renderTopics();
+  try { renderPersonas(); } catch(e) { console.error('renderPersonas failed:', e); }
+  try { renderTopics(); } catch(e) { console.error('renderTopics failed:', e); }
 
   // Restore API key
   const saved = localStorage.getItem('gtm-fishbowl-key');
@@ -713,25 +713,63 @@ function handleFile(event) {
 // ────────────────────────────────────────────────────────────
 
 function renderPersonas() {
-  document.getElementById('sList').innerHTML = PERSONAS.map(p => `
-    <div class="s-item" id="si-${p.id}" onclick="toggleS('${p.id}')">
-      <div class="s-av" style="background:${p.color}">${p.initials}</div>
-      <div class="s-info">
-        <div class="s-name">${p.name}</div>
-        <div class="s-role">${p.specialty}</div>
-      </div>
-      <div class="s-cb" id="cb-${p.id}"></div>
-    </div>
-  `).join('');
+  var list = document.getElementById('sList');
+  if (!list) return;
+  list.innerHTML = '';
+  for (var i = 0; i < PERSONAS.length; i++) {
+    var p = PERSONAS[i];
+    var item = document.createElement('div');
+    item.className = 's-item';
+    item.id = 'si-' + p.id;
+    (function(pid) {
+      item.addEventListener('click', function() { toggleS(pid); });
+    })(p.id);
+    var av = document.createElement('div');
+    av.className = 's-av';
+    av.style.background = p.color;
+    av.textContent = p.initials;
+    var info = document.createElement('div');
+    info.className = 's-info';
+    var name = document.createElement('div');
+    name.className = 's-name';
+    name.textContent = p.name;
+    var role = document.createElement('div');
+    role.className = 's-role';
+    role.textContent = p.specialty;
+    info.appendChild(name);
+    info.appendChild(role);
+    var cb = document.createElement('div');
+    cb.className = 's-cb';
+    cb.id = 'cb-' + p.id;
+    item.appendChild(av);
+    item.appendChild(info);
+    item.appendChild(cb);
+    list.appendChild(item);
+  }
 }
 
 function renderTopics() {
-  document.getElementById('tList').innerHTML = TOPICS.map(t => `
-    <div class="t-item" id="ti-${t.id}" onclick="pickTopic('${t.id}')">
-      <div class="t-cat">${t.cat}</div>
-      <div class="t-title">${t.title}</div>
-    </div>
-  `).join('');
+  var list = document.getElementById('tList');
+  if (!list) return;
+  list.innerHTML = '';
+  for (var i = 0; i < TOPICS.length; i++) {
+    var t = TOPICS[i];
+    var item = document.createElement('div');
+    item.className = 't-item';
+    item.id = 'ti-' + t.id;
+    (function(tid) {
+      item.addEventListener('click', function() { pickTopic(tid); });
+    })(t.id);
+    var cat = document.createElement('div');
+    cat.className = 't-cat';
+    cat.textContent = t.cat;
+    var title = document.createElement('div');
+    title.className = 't-title';
+    title.textContent = t.title;
+    item.appendChild(cat);
+    item.appendChild(title);
+    list.appendChild(item);
+  }
 }
 
 // ────────────────────────────────────────────────────────────
