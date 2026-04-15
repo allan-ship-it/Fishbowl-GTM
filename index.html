@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Opero GTM Fishbowl — AI Discussion Arena</title>
+  <title>GTM Fishbowl — AI Strategy Arena</title>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -13,7 +13,6 @@
       --accent: #FF5500;
       --accent-h: #FF6B1A;
       --accent-dim: rgba(255,85,0,0.10);
-      --accent-dim2: rgba(255,85,0,0.18);
       --text: #FFFFFF;
       --muted: #AAAAAA;
       --dim: #555555;
@@ -36,31 +35,15 @@
 
     /* ── HEADER ── */
     .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 20px 32px;
-      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 20px;
+      padding: 18px 32px; border-bottom: 1px solid var(--border);
       flex-shrink: 0;
     }
-
-    .brand { display: flex; align-items: center; gap: 10px; }
 
     .hex {
-      width: 28px; height: 28px;
-      background: var(--accent);
+      width: 28px; height: 28px; background: var(--accent); flex-shrink: 0;
       clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
-      flex-shrink: 0;
-    }
-
-    .brand-label {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--muted);
-    }
-
-    .header-title {
-      display: flex; flex-direction: column; gap: 2px;
     }
 
     .header-title h1 {
@@ -69,16 +52,12 @@
     }
 
     .header-title h1 span { color: var(--accent); }
-
-    .header-sub {
-      font-size: 12px; color: var(--muted);
-    }
+    .header-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
     .api-widget {
       display: flex; align-items: center; gap: 8px;
       background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 8px; padding: 8px 14px;
-      flex-shrink: 0;
+      border-radius: 8px; padding: 8px 14px; flex-shrink: 0;
     }
 
     .api-label {
@@ -96,32 +75,21 @@
 
     .api-dot {
       width: 7px; height: 7px; border-radius: 50%;
-      background: var(--bh); flex-shrink: 0;
-      transition: background 0.3s;
+      background: var(--bh); flex-shrink: 0; transition: background 0.3s;
     }
 
     .api-dot.ok { background: #22C55E; }
 
     /* ── LAYOUT ── */
     .layout {
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      flex: 1;
-      min-height: 0;
-      overflow: hidden;
+      display: grid; grid-template-columns: 380px 1fr;
+      flex: 1; min-height: 0; overflow: hidden;
     }
 
     /* ── SIDEBAR ── */
-    .sidebar {
-      border-right: 1px solid var(--border);
-      display: flex; flex-direction: column;
-      overflow: hidden;
-    }
+    .sidebar { border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
 
-    .sidebar-scroll {
-      flex: 1; overflow-y: auto; padding: 20px 20px 0;
-    }
-
+    .sidebar-scroll { flex: 1; overflow-y: auto; padding: 20px 20px 0; }
     .sidebar-scroll::-webkit-scrollbar { width: 4px; }
     .sidebar-scroll::-webkit-scrollbar-thumb { background: var(--bh); border-radius: 2px; }
 
@@ -133,11 +101,51 @@
       display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
     }
 
-    .section-hd::after {
-      content: ''; flex: 1; height: 1px; background: var(--border);
+    .section-hd::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* ── STEP 0: BUSINESS CONTEXT ── */
+    .ctx-textarea {
+      width: 100%; background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px 14px; resize: vertical; min-height: 100px;
+      font-family: 'Barlow', sans-serif; font-size: 13px; color: var(--text);
+      outline: none; line-height: 1.6; transition: border-color 0.15s;
     }
 
-    /* Strategist items */
+    .ctx-textarea::placeholder { color: var(--dim); }
+    .ctx-textarea:focus { border-color: var(--accent); }
+    .ctx-textarea.filled { border-color: #22C55E; }
+
+    .ctx-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 8px;
+    }
+
+    .ctx-count { font-size: 11px; color: var(--dim); }
+    .ctx-count.ok { color: #22C55E; }
+
+    .upload-btn {
+      display: flex; align-items: center; gap: 6px;
+      background: none; border: 1px solid var(--border);
+      border-radius: 6px; padding: 5px 10px; cursor: pointer;
+      font-family: 'Barlow', sans-serif; font-size: 11px;
+      font-weight: 600; color: var(--muted); transition: all 0.15s;
+    }
+
+    .upload-btn:hover { border-color: var(--bh); color: var(--text); }
+    #fileInput { display: none; }
+
+    /* ── PERSONAS ── */
+    .sel-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+
+    .txt-btn {
+      background: none; border: none; cursor: pointer;
+      font-family: 'Barlow', sans-serif; font-size: 11px;
+      font-weight: 600; color: var(--muted); text-decoration: underline; padding: 0;
+    }
+
+    .txt-btn:hover { color: var(--text); }
+    .sel-count { margin-left: auto; font-size: 11px; color: var(--muted); }
+
     .s-list { display: flex; flex-direction: column; gap: 6px; }
 
     .s-item {
@@ -154,8 +162,7 @@
     .s-av {
       width: 32px; height: 32px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 900; color: #fff;
-      flex-shrink: 0;
+      font-size: 11px; font-weight: 900; color: #fff; flex-shrink: 0;
     }
 
     .s-info { flex: 1; min-width: 0; }
@@ -168,66 +175,32 @@
       position: relative; transition: all 0.15s;
     }
 
-    .s-item.on .s-cb {
-      background: var(--accent); border-color: var(--accent);
-    }
+    .s-item.on .s-cb { background: var(--accent); border-color: var(--accent); }
 
     .s-item.on .s-cb::after {
       content: '';
-      position: absolute;
-      left: 2px; top: 5px;
+      position: absolute; left: 2px; top: 5px;
       width: 8px; height: 4px;
-      border-left: 2px solid #fff;
-      border-bottom: 2px solid #fff;
+      border-left: 2px solid #fff; border-bottom: 2px solid #fff;
       transform: rotate(-45deg) translateY(-2px);
     }
 
-    .sel-row {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
-    }
-
-    .txt-btn {
-      background: none; border: none; cursor: pointer;
-      font-family: 'Barlow', sans-serif; font-size: 11px;
-      font-weight: 600; color: var(--muted);
-      text-decoration: underline; padding: 0;
-    }
-
-    .txt-btn:hover { color: var(--text); }
-
-    .sel-count {
-      margin-left: auto; font-size: 11px; color: var(--muted);
-    }
-
-    /* Topics */
+    /* ── TOPICS ── */
     .t-list { display: flex; flex-direction: column; gap: 5px; }
 
     .t-item {
       background: var(--bg2); border: 1px solid var(--border);
       border-radius: 8px; padding: 9px 12px;
-      cursor: pointer; transition: all 0.15s;
-      font-family: 'Barlow', sans-serif;
+      cursor: pointer; transition: all 0.15s; font-family: 'Barlow', sans-serif;
     }
 
     .t-item:hover { border-color: var(--bh); }
     .t-item.on { border-color: var(--accent); background: var(--accent-dim); }
+    .t-cat { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 2px; }
+    .t-title { font-size: 12px; font-weight: 600; color: var(--muted); line-height: 1.3; }
+    .t-item.on .t-title, .t-item:hover .t-title { color: var(--text); }
 
-    .t-cat {
-      font-size: 9px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.1em; color: var(--accent); margin-bottom: 2px;
-    }
-
-    .t-title {
-      font-size: 12px; font-weight: 600; color: var(--muted);
-      line-height: 1.3;
-    }
-
-    .t-item.on .t-title { color: var(--text); }
-    .t-item:hover .t-title { color: var(--text); }
-
-    .custom-row {
-      display: flex; gap: 6px; margin-top: 8px;
-    }
+    .custom-row { display: flex; gap: 6px; margin-top: 8px; }
 
     .custom-in {
       flex: 1; background: var(--bg2); border: 1px solid var(--border);
@@ -240,11 +213,7 @@
     .custom-in:focus { border-color: var(--accent); }
     .custom-in.active { border-color: var(--accent); background: var(--accent-dim); }
 
-    .custom-active-label {
-      display: none; margin-top: 6px; font-size: 11px;
-      color: var(--accent); font-weight: 600;
-    }
-
+    .custom-active-label { display: none; margin-top: 6px; font-size: 11px; color: var(--accent); font-weight: 600; }
     .custom-active-label.show { display: block; }
 
     .add-btn {
@@ -266,30 +235,18 @@
       border-radius: 8px; padding: 14px; color: #fff;
       font-family: 'Barlow', sans-serif; font-size: 14px;
       font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em;
-      cursor: pointer; transition: background 0.15s, opacity 0.15s;
+      cursor: pointer; transition: background 0.15s;
     }
 
     .launch-btn:hover:not(:disabled) { background: var(--accent-h); }
+    .launch-btn:disabled { background: var(--bg3); color: var(--dim); cursor: not-allowed; }
 
-    .launch-btn:disabled {
-      background: var(--bg3); color: var(--dim); cursor: not-allowed;
-    }
-
-    .launch-meta {
-      text-align: center; font-size: 11px;
-      color: var(--dim); margin-top: 6px;
-    }
+    .launch-meta { text-align: center; font-size: 11px; color: var(--dim); margin-top: 6px; }
 
     /* ── DISCUSSION PANE ── */
-    .discuss {
-      display: flex; flex-direction: column;
-      overflow: hidden;
-    }
+    .discuss { display: flex; flex-direction: column; overflow: hidden; }
 
-    .discuss-scroll {
-      flex: 1; overflow-y: auto; padding: 28px 40px;
-    }
-
+    .discuss-scroll { flex: 1; overflow-y: auto; padding: 28px 40px; }
     .discuss-scroll::-webkit-scrollbar { width: 4px; }
     .discuss-scroll::-webkit-scrollbar-thumb { background: var(--bh); border-radius: 2px; }
 
@@ -297,18 +254,13 @@
     .empty {
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      height: 100%; gap: 12px; text-align: center;
-      padding: 40px;
+      height: 100%; gap: 12px; text-align: center; padding: 40px;
     }
 
-    .empty-fish { font-size: 56px; opacity: 0.2; }
+    .empty-icon { font-size: 56px; opacity: 0.2; }
 
-    .empty h2 {
-      font-size: 20px; font-weight: 900; text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .empty p { font-size: 13px; color: var(--dim); max-width: 320px; }
+    .empty h2 { font-size: 20px; font-weight: 900; text-transform: uppercase; color: var(--muted); }
+    .empty p { font-size: 13px; color: var(--dim); max-width: 340px; }
 
     /* Context banner */
     .ctx-banner {
@@ -321,25 +273,14 @@
       letter-spacing: 0.1em; color: var(--accent); margin-bottom: 6px;
     }
 
-    .ctx-banner p { font-size: 13px; color: var(--muted); line-height: 1.6; }
-    .ctx-banner strong { color: var(--text); }
+    .ctx-banner p { font-size: 13px; color: var(--muted); line-height: 1.6; white-space: pre-wrap; }
 
     /* Discussion header */
     .discuss-hd { margin-bottom: 24px; }
+    .discuss-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 4px; }
+    .discuss-title { font-size: 22px; font-weight: 900; text-transform: uppercase; line-height: 1.1; margin-bottom: 10px; }
 
-    .discuss-label {
-      font-size: 10px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.12em; color: var(--accent); margin-bottom: 4px;
-    }
-
-    .discuss-title {
-      font-size: 22px; font-weight: 900; text-transform: uppercase;
-      line-height: 1.1; margin-bottom: 10px;
-    }
-
-    .chips {
-      display: flex; flex-wrap: wrap; gap: 5px;
-    }
+    .chips { display: flex; flex-wrap: wrap; gap: 5px; }
 
     .chip {
       display: flex; align-items: center; gap: 5px;
@@ -347,29 +288,13 @@
       border-radius: 100px; padding: 3px 8px 3px 5px;
     }
 
-    .chip-av {
-      width: 18px; height: 18px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 7px; font-weight: 900; color: #fff;
-    }
-
+    .chip-av { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 7px; font-weight: 900; color: #fff; }
     .chip-name { font-size: 11px; font-weight: 600; color: var(--muted); }
 
     /* Loading */
-    .loading {
-      display: flex; flex-direction: column;
-      align-items: center; gap: 16px; padding: 40px;
-    }
-
-    .spinner {
-      width: 48px; height: 48px; border-radius: 50%;
-      border: 3px solid var(--border);
-      border-top-color: var(--accent);
-      animation: spin 0.9s linear infinite;
-    }
-
+    .loading { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 40px; }
+    .spinner { width: 48px; height: 48px; border-radius: 50%; border: 3px solid var(--border); border-top-color: var(--accent); animation: spin 0.9s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
-
     .loading p { font-size: 13px; color: var(--muted); }
 
     /* Speaker card */
@@ -383,53 +308,21 @@
     .s-card.in { opacity: 1; transform: translateY(0); }
     .s-card:hover { border-color: var(--bh); }
 
-    .s-card-meta {
-      display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
-    }
+    .s-card-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
 
-    .s-card-av {
-      width: 40px; height: 40px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 900; color: #fff; flex-shrink: 0;
-    }
-
+    .s-card-av { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; color: #fff; flex-shrink: 0; }
     .s-card-name { font-size: 15px; font-weight: 700; line-height: 1.2; }
+    .s-card-role { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--accent); }
 
-    .s-card-role {
-      font-size: 10px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.07em; color: var(--accent);
-    }
+    .round-badge { margin-left: auto; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dim); background: var(--bg3); padding: 3px 8px; border-radius: 100px; flex-shrink: 0; }
 
-    .round-badge {
-      margin-left: auto; font-size: 10px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      color: var(--dim); background: var(--bg3);
-      padding: 3px 8px; border-radius: 100px; flex-shrink: 0;
-    }
-
-    .s-card blockquote {
-      font-size: 14px; line-height: 1.75; color: #DDDDDD;
-      padding-left: 14px; border-left: 3px solid var(--accent);
-      margin-bottom: 12px;
-    }
-
+    .s-card blockquote { font-size: 14px; line-height: 1.75; color: #DDDDDD; padding-left: 14px; border-left: 3px solid var(--accent); margin-bottom: 12px; }
     .s-card blockquote strong { color: var(--text); }
 
-    .action-box {
-      background: var(--accent-dim); border-radius: 6px;
-      padding: 10px 14px; font-size: 12px; font-weight: 600;
-      color: var(--accent);
-    }
+    .action-box { background: var(--accent-dim); border-radius: 6px; padding: 10px 14px; font-size: 12px; font-weight: 600; color: var(--accent); }
+    .action-box::before { content: "→ ACTION: "; font-weight: 700; }
 
-    .action-box::before {
-      content: "→ OPERO ACTION: "; font-weight: 700;
-    }
-
-    .challenge-line {
-      margin-top: 8px; font-size: 12px; color: var(--muted);
-      font-style: italic;
-    }
-
+    .challenge-line { margin-top: 8px; font-size: 12px; color: var(--muted); font-style: italic; }
     .challenge-line strong { color: var(--text); font-style: normal; }
 
     /* Synthesis */
@@ -441,27 +334,14 @@
     }
 
     .synth-card.in { opacity: 1; transform: translateY(0); }
-
-    .synth-card h3 {
-      font-size: 13px; font-weight: 900; text-transform: uppercase;
-      letter-spacing: 0.08em; margin-bottom: 10px;
-    }
-
+    .synth-card h3 { font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
     .synth-card p { font-size: 14px; line-height: 1.7; }
     .synth-card p strong { font-weight: 700; }
 
     /* Round divider */
-    .round-div {
-      display: flex; align-items: center; gap: 12px;
-      margin: 28px 0 20px;
-    }
-
+    .round-div { display: flex; align-items: center; gap: 12px; margin: 28px 0 20px; }
     .round-div-line { flex: 1; height: 1px; background: var(--border); }
-
-    .round-div-label {
-      font-size: 10px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.1em; color: var(--dim); white-space: nowrap;
-    }
+    .round-div-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--dim); white-space: nowrap; }
 
     /* Follow-up */
     .followup {
@@ -472,12 +352,7 @@
     }
 
     .followup.in { opacity: 1; transform: translateY(0); }
-
-    .followup-label {
-      font-size: 10px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.1em; color: var(--accent); margin-bottom: 10px;
-    }
-
+    .followup-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 10px; }
     .followup-row { display: flex; gap: 8px; }
 
     .followup-in {
@@ -492,19 +367,15 @@
 
     .send-btn {
       background: var(--accent); border: none; border-radius: 8px;
-      padding: 12px 20px; color: #fff;
-      font-family: 'Barlow', sans-serif; font-size: 13px;
-      font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 12px 20px; color: #fff; font-family: 'Barlow', sans-serif;
+      font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
       cursor: pointer; white-space: nowrap;
     }
 
     .send-btn:hover:not(:disabled) { background: var(--accent-h); }
     .send-btn:disabled { background: var(--bg3); color: var(--dim); cursor: not-allowed; }
 
-    /* Suggested questions */
-    .suggest-row {
-      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;
-    }
+    .suggest-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 
     .suggest-chip {
       background: none; border: 1px solid var(--border);
@@ -513,24 +384,17 @@
       color: var(--muted); cursor: pointer; transition: all 0.15s;
     }
 
-    .suggest-chip:hover {
-      border-color: var(--accent); color: var(--text);
-    }
+    .suggest-chip:hover { border-color: var(--accent); color: var(--text); }
 
     /* Error */
-    .err {
-      background: rgba(220,38,38,0.1); border: 1px solid rgba(220,38,38,0.3);
-      border-radius: 8px; padding: 14px 16px;
-      color: #F87171; font-size: 13px; margin-bottom: 14px;
-    }
+    .err { background: rgba(220,38,38,0.1); border: 1px solid rgba(220,38,38,0.3); border-radius: 8px; padding: 14px 16px; color: #F87171; font-size: 13px; margin-bottom: 14px; }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
       .layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
-      .sidebar { max-height: 50vh; overflow: hidden; }
+      .sidebar { max-height: 55vh; }
       .discuss-scroll { padding: 20px; }
       .header { padding: 14px 20px; }
-      .api-input { width: 160px; }
+      .api-input { width: 150px; }
     }
   </style>
 </head>
@@ -538,17 +402,14 @@
 
 <!-- ── HEADER ── -->
 <header class="header">
-  <div style="display:flex;align-items:center;gap:16px;">
-    <div class="brand">
-      <div class="hex"></div>
-      <span class="brand-label">Opero Labs</span>
-    </div>
+  <div style="display:flex;align-items:center;gap:14px;">
+    <div class="hex"></div>
     <div class="header-title">
       <h1>GTM <span>Fishbowl</span></h1>
-      <p class="header-sub">Live AI discussion with the world's top GTM strategists</p>
+      <p class="header-sub">Live AI debate with 12 GTM archetypes — powered by Claude</p>
     </div>
   </div>
-  <div class="api-widget">
+  <div class="api-widget" id="apiWidget">
     <span class="api-label">API Key</span>
     <input type="password" class="api-input" id="apiKey" placeholder="sk-ant-..." autocomplete="off">
     <div class="api-dot" id="apiDot"></div>
@@ -562,9 +423,28 @@
   <aside class="sidebar">
     <div class="sidebar-scroll">
 
-      <!-- STEP 1: Strategists -->
+      <!-- STEP 0: BUSINESS CONTEXT -->
       <div class="section">
-        <div class="section-hd">1 — Select Strategists</div>
+        <div class="section-hd">0 — Describe Your Business</div>
+        <textarea
+          class="ctx-textarea"
+          id="ctxInput"
+          placeholder="Paste a description of your company, product, target customer, current stage, and biggest GTM challenge. The more specific you are, the better the debate.&#10;&#10;Example: We sell a SaaS platform that helps logistics companies track real-time shipments. Our ICP is ops managers at 3PL providers with 50–500 employees. We have 8 paying customers, €40K ARR, and are trying to figure out our first repeatable sales motion..."
+          oninput="onCtxChange()"
+        ></textarea>
+        <div class="ctx-footer">
+          <span class="ctx-count" id="ctxCount">0 words</span>
+          <label class="upload-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload .txt / .md
+            <input type="file" id="fileInput" accept=".txt,.md,.pdf" onchange="handleFile(event)">
+          </label>
+        </div>
+      </div>
+
+      <!-- STEP 1: PERSONAS -->
+      <div class="section">
+        <div class="section-hd">1 — Select Personas</div>
         <div class="sel-row">
           <button class="txt-btn" onclick="selectAll()">All</button>
           <span style="color:var(--dim)">·</span>
@@ -574,7 +454,7 @@
         <div class="s-list" id="sList"></div>
       </div>
 
-      <!-- STEP 2: Topics -->
+      <!-- STEP 2: TOPICS -->
       <div class="section">
         <div class="section-hd">2 — Choose Topic</div>
         <div class="t-list" id="tList"></div>
@@ -593,9 +473,9 @@
     <!-- LAUNCH -->
     <div class="launch-bar">
       <button class="launch-btn" id="launchBtn" onclick="launch()" disabled>
-        Start Fishbowl Discussion
+        Start Fishbowl Debate
       </button>
-      <p class="launch-meta" id="launchMeta">Select strategists and a topic to begin</p>
+      <p class="launch-meta" id="launchMeta">Complete steps 0–2 to begin</p>
     </div>
   </aside>
 
@@ -603,23 +483,16 @@
   <main class="discuss">
     <div class="discuss-scroll" id="discussScroll">
 
-      <!-- EMPTY STATE -->
       <div class="empty" id="emptyState">
-        <div class="empty-fish">🐟</div>
+        <div class="empty-icon">🐟</div>
         <h2>The Fishbowl Awaits</h2>
-        <p>Select 2+ strategists, pick a discussion topic, enter your Anthropic API key, and start the debate.</p>
+        <p>Describe your business, select 2+ personas, pick a topic, and start the debate.</p>
       </div>
 
-      <!-- DISCUSSION CONTENT -->
       <div id="discussContent" style="display:none;">
         <div class="ctx-banner">
-          <div class="ctx-banner-hd">Opero Context</div>
-          <p>
-            <strong>Opero</strong> captures disappearing expert knowledge in industrial and manufacturing companies,
-            making it instantly accessible via AI. Targets <strong>SMEs and mid-market industrial enterprises</strong>
-            in Denmark, expanding to Europe. Key metrics: <strong>3× faster answers, 40% less downtime, ROI from week one.</strong>
-            Stage: <strong>early traction, building repeatable sales motion. Founder-led sales.</strong>
-          </p>
+          <div class="ctx-banner-hd">Business Context</div>
+          <p id="ctxDisplay"></p>
         </div>
         <div id="discussHd" class="discuss-hd"></div>
         <div id="feed"></div>
@@ -631,133 +504,123 @@
 
 <script>
 // ────────────────────────────────────────────────────────────
-// DATA
+// PERSONAS
 // ────────────────────────────────────────────────────────────
 
-const STRATEGISTS = [
+const PERSONAS = [
   {
-    id: 'dunford', name: 'April Dunford', initials: 'AD', color: '#E8443A',
-    role: 'Positioning Expert', tag: 'Obviously Awesome',
-    framework: `Positioning methodology (10 steps): identify competitive alternatives → isolate unique attributes → map differentiated value → define target customers → name the market category. Positioning is strategic context, not messaging. Famous for helping B2B SaaS companies escape "AI/tech" categories and own a specific, defensible niche. Book: Obviously Awesome.`,
-    voice: `Direct and sharp. Often challenges the premise of the question. Focuses on buyer psychology — specifically what customers compare your product to (the "competitive alternative"). Uses phrases like "the category you need to own" and "what does the customer use instead of you?" Tends to disagree with people who lead with product features rather than positioning context.`,
+    id: 'positioning_consultant',
+    name: 'The Positioning Consultant',
+    initials: 'PC', color: '#E8443A',
+    specialty: 'Messaging & Market Fit',
+    bias: `Always starts by asking: "What do buyers use instead of you?" Believes niche positioning beats broad messaging. Champions owning a specific category. The core conviction: if the positioning is wrong, nothing else works — not outbound, not PLG, not paid. Will challenge anyone who leads with features or uses generic category language like "AI platform" or "enterprise software."`,
+    method: `1. Map the competitive alternatives (what buyers actually do instead). 2. Identify the unique attributes only you have against those alternatives. 3. Name the value those attributes deliver. 4. Define who cares most. 5. Name the category you want to own. Never build a sales motion before positioning is locked.`,
   },
   {
-    id: 'roberge', name: 'Mark Roberge', initials: 'MR', color: '#D4A017',
-    role: 'Science of Scaling', tag: 'HubSpot / Stage 2 Capital',
-    framework: `Science of Scaling: need Product-Market Fit AND Go-to-Market Fit sequentially before scaling. Core metric is unit economics — CAC payback, LTV:CAC ratio. The GTM-Fit test: can a new AE ramp to quota within 6 months? Does pipeline generation predict revenue? Never scale before unit economics prove the motion works. Founding CRO at HubSpot ($0→$100M ARR). Book: The Science of Scaling.`,
-    voice: `Data-driven, process-oriented. Uses specific metrics and thresholds. Says things like "don't hire the second AE until the first proves the model." Cautious about premature scaling. Asks "what does your CAC payback look like?" Respects Chris Walker's demand gen work but pushes back on skipping measurement.`,
+    id: 'outbound_agency',
+    name: 'The Outbound Sales Agency',
+    initials: 'OA', color: '#D4A017',
+    specialty: 'Cold Outreach & Pipeline',
+    bias: `Always starts by asking: "Do you have a list, and does your sequence have a hypothesis?" Champions multi-touch outreach: email + LinkedIn + phone in a structured cadence. Believes ICP precision is the single biggest lever on outbound ROI. Skeptical of inbound-only strategies for early-stage companies. Tracks everything: reply rate, meeting rate, cost per booked meeting.`,
+    method: `1. Define ICP with 5 firmographic and 2 trigger-based filters. 2. Build a targeted list of 200–500 named accounts. 3. Write a 6-step sequence (3 email + 2 LinkedIn + 1 call) with a clear hypothesis per step. 4. Measure reply rate (target: 8%+) and meeting rate (target: 2%+). 5. Kill or iterate sequences at 100 contacts.`,
   },
   {
-    id: 'verna', name: 'Elena Verna', initials: 'EV', color: '#C73866',
-    role: 'Product-Led Growth', tag: 'Lovable / Miro / SurveyMonkey',
-    framework: `PLG → PLS (Product-Led Sales) pipeline. Freemium/free self-serve entry for end users builds bottom-up adoption, creates champions, then sales layers on top to convert enterprise. Usage data is the best lead scoring system. Scaled Lovable to $80M ARR in 7 months. Former SVP Growth at SurveyMonkey, interim CMO at Miro, Head of Growth at Amplitude.`,
-    voice: `Challenges the assumption that "industrial = sales-led." Pushes for self-serve wedges even in traditionally offline markets. Highly specific about activation metrics and time-to-value. Often says "if a user can't get value in 5 minutes, it's a product problem, not a sales problem." Tends to disagree with pure outbound-first thinkers.`,
+    id: 'plg_studio',
+    name: 'The PLG Growth Studio',
+    initials: 'PG', color: '#C73866',
+    specialty: 'Product-Led Growth',
+    bias: `Always asks: "Can a user get value in under 5 minutes without talking to sales?" Believes the product should be the primary acquisition channel. Champions freemium, trials, and self-serve onboarding. Skeptical of pure sales-led motions for products that could have viral loops. Core conviction: if setup takes more than a day, you've already lost the PLG bet.`,
+    method: `1. Define the "aha moment" — the exact in-product event that predicts retention. 2. Build a self-serve path to that moment in under 5 minutes. 3. Instrument activation with a single leading metric. 4. Create a freemium or trial tier that lets end users try before IT approves. 5. Use product usage data as the lead scoring signal for sales.`,
   },
   {
-    id: 'walker', name: 'Chris Walker', initials: 'CW', color: '#7B2FBE',
-    role: 'Demand Generation', tag: 'Refine Labs / Passetto',
-    framework: `Kill the MQL. B2B buyers discover solutions through dark social — podcasts, LinkedIn, peer conversations — not gated content or cold email. Build demand through founder-led thought leadership. Measure pipeline and revenue, not leads. Stop gating content. LinkedIn is the highest-leverage B2B channel. Ran Refine Labs (exited 2025), now Passetto (advisory for $10M–$100M SaaS CEOs).`,
-    voice: `Provocative, anti-traditional marketing. Uses "dark social," "demand generation vs. lead generation," "the MQL is dead." Pushes LinkedIn and founder brand extremely hard. Skeptical of cold outbound at scale. Will challenge anyone measuring leads or gating content. Very direct, sometimes controversial.`,
+    id: 'demand_gen_agency',
+    name: 'The Demand Gen Agency',
+    initials: 'DG', color: '#7B2FBE',
+    specialty: 'Paid & Content Distribution',
+    bias: `Champions building demand before capturing it. Believes buyers make 70% of their decision before talking to sales — so the brand needs to be present during that dark period. Pushes LinkedIn thought leadership, SEO, and targeted paid channels. Anti-gating content. Tracks pipeline influenced, not MQLs. Will challenge anyone still running gated whitepapers or measuring lead volume.`,
+    method: `1. Map where your ICP spends time online (LinkedIn, industry forums, newsletters). 2. Build an ungated content engine (2 posts/week minimum). 3. Run LinkedIn thought leadership from the founder's personal account. 4. Use retargeting to stay in front of ICP who engaged. 5. Measure pipeline influenced by content, not lead counts.`,
   },
   {
-    id: 'poyar', name: 'Kyle Poyar', initials: 'KP', color: '#3B7DD8',
-    role: 'Pricing & PLG Economics', tag: 'Growth Unhinged',
-    framework: `Pricing as product-market fit signal. The "value metric" — what scales with customer value? Usage-based and value-metric pricing. Packaging tiers must align price to customer value expansion. Freemium conversion economics. Former Operating Partner at OpenView, 15 years at Simon-Kucher. Newsletter: Growth Unhinged (75K+ readers).`,
-    voice: `Analytical. Always asks "what is your value metric?" Focused on expansion revenue, net revenue retention, and pricing incentives. Tends to disagree with per-seat pricing for AI products. Points out that pricing communicates positioning (referencing Dunford's work). Uses data from SaaS pricing benchmarks.`,
+    id: 'pricing_specialist',
+    name: 'The SaaS Pricing Specialist',
+    initials: 'PS', color: '#3B7DD8',
+    specialty: 'Monetisation & Packaging',
+    bias: `Obsessed with the value metric — the unit that scales with customer value. Always asks: "What expands when your customer gets more value?" Believes pricing communicates positioning. Champions usage-based and tiered pricing over flat per-seat models. Will challenge anyone pricing like a tool when they should price like infrastructure. Core conviction: wrong pricing model kills expansion revenue.`,
+    method: `1. Identify the value metric (the thing that scales with customer success). 2. Test 3 pricing hypotheses with real prospects before committing. 3. Build 3 tiers with clear upgrade triggers built into the product. 4. Anchor pricing to the cost of the problem, not the cost of the solution. 5. Design expansion revenue into the product — don't rely on sales to upsell.`,
   },
   {
-    id: 'vajre', name: 'Sangram Vajre', initials: 'SV', color: '#2D6CDF',
-    role: 'GTM Operating System', tag: 'GTM Partners / Terminus',
-    framework: `MOVE framework: Market (Who is your ICP?), Operations (What value do you deliver?), Velocity (When do they buy — what creates urgency?), Expansion (Where do they discover you?). Three stages: Ideation (problem-market fit), Transition (product-market fit), Execution (platform-market fit). Also created the 8-pillar GTM Operating System. Co-founded Terminus. Book: MOVE.`,
-    voice: `Systematic, framework-first. Often asks "which MOVE stage are you actually in?" Focuses on diagnosing before prescribing. Often says "you can't go to Execution if you haven't finished Transition." Pushes for ICP specificity. Collaborative tone but firm on sequencing.`,
+    id: 'abm_consultancy',
+    name: 'The ABM Consultancy',
+    initials: 'AB', color: '#2D6CDF',
+    specialty: 'Account-Based Marketing',
+    bias: `Believes precision beats volume every time. Always asks: "Which 50 accounts matter most, and do all three stakeholders at each account know your name?" Champions named account targeting, multi-threaded engagement, and long-game relationship orchestration. Skeptical of spray-and-pray outbound. Core conviction: in a small TAM, every wasted impression is a missed relationship.`,
+    method: `1. Define a Tier 1 target account list of 50 named accounts. 2. Map the buying committee at each account (economic buyer, champion, blocker). 3. Build personalised outreach for each stakeholder role, not just the title. 4. Orchestrate across email, LinkedIn, events, and direct mail. 5. Measure account engagement score and pipeline coverage per account.`,
   },
   {
-    id: 'kooij', name: 'Jacco van der Kooij', initials: 'JK', color: '#2E7D32',
-    role: 'Revenue Architecture', tag: 'Winning by Design',
-    framework: `Revenue Architecture: Growth = Acquisition + Retention + Expansion. Bowtie model maps the full customer lifecycle. Design the repeatable revenue "factory" before hiring. Six governing models for recurring revenue engines. 250+ blueprints for customer-centric sales organizations. Founder of Winning by Design. Books: Revenue Architecture, Blueprints for a SaaS Sales Organization.`,
-    voice: `Process engineer mindset. Uses bowtie model, blueprints, systematic design. Says "design before you hire." Emphasizes the importance of expansion revenue (NRR) over acquisition-only thinking. Will challenge anyone who focuses only on getting new logos without designing the retention and expansion engine.`,
+    id: 'revenue_architect',
+    name: 'The Revenue Architect',
+    initials: 'RA', color: '#2E7D32',
+    specialty: 'Sales Process & CRM',
+    bias: `Designs systems before hiring people. Always asks: "What does your bowtie look like, and where does the leakage happen?" Believes the biggest GTM mistake is building a team before building a repeatable process. Champions pipeline stage definition, CRM hygiene, and expansion revenue design. Will challenge anyone who tracks activity metrics instead of conversion metrics.`,
+    method: `1. Define the bowtie: Acquisition → Onboarding → Retention → Expansion — with metrics at each stage. 2. Map pipeline stages with entry/exit criteria. 3. Build CRM discipline before hiring the first rep. 4. Design the expansion trigger into the customer journey — not into the sales process. 5. Review conversion rates weekly, not activity counts.`,
   },
   {
-    id: 'tunguz', name: 'Tomasz Tunguz', initials: 'TT', color: '#1A8754',
-    role: 'Data-Driven SaaS Strategy', tag: 'Theory Ventures',
-    framework: `No single branded framework — uses data-driven analysis of real SaaS metrics and benchmarks to test conventional wisdom. Vertical SaaS companies that own a niche category outperform horizontal platforms on unit economics. Uses win/loss data, segment analysis, and cohort benchmarks to validate GTM assumptions. Former prolific SaaS blogger, now VC at Theory Ventures.`,
-    voice: `Benchmarks everything. "The data says...", "Looking at vertical SaaS top quartile...", "In our analysis of 200+ companies..." Challenges assumptions with evidence rather than opinion. Respects all frameworks but tests them against data. Specific about percentile ranges and thresholds.`,
+    id: 'vc_operator',
+    name: 'The VC-Backed Operator',
+    initials: 'VC', color: '#1A8754',
+    specialty: 'Scale & Unit Economics',
+    bias: `Unit economics above all else. Always asks: "What's your CAC payback period, and can a new hire replicate your close rate in 6 months?" Champions proving GTM-Fit before pouring fuel on the fire. Premature scaling is the #1 killer of good startups. Believes in founder-led sales until €1M ARR, then methodical hiring. Will challenge anyone who wants to scale before the model is proven.`,
+    method: `1. Track CAC payback monthly — must be under 18 months before scaling. 2. Prove the motion works with 20+ closed deals before hiring a rep. 3. Define the scaling gate: the exact metrics that must be hit before each hire. 4. Document every sales conversation — objections, timeline, stakeholders. 5. Don't raise for GTM until you can show a predictable unit economics model.`,
   },
   {
-    id: 'rachitsky', name: 'Lenny Rachitsky', initials: 'LR', color: '#0A7E8C',
-    role: 'Product Growth Playbooks', tag: "Lenny's Newsletter",
-    framework: `Curated growth playbooks from primary research. Landmark research: "GTM motions of 30 B2B SaaS companies" and "How the fastest-growing B2B businesses found their first 10 customers" (mostly direct outreach + community, not ads). Bridges product and GTM strategy. Former Airbnb product lead. Largest product/growth newsletter globally.`,
-    voice: `Curator and synthesizer. References specific case studies: "When I researched how companies like Notion/Figma/Slack did this..." Bridges product and GTM. Tends to be even-handed and practical. Will push back on anything that doesn't match his research. Often says "the data from our research shows X, but it depends heavily on Y."`,
+    id: 'channel_partner',
+    name: 'The Channel & Partner Specialist',
+    initials: 'CP', color: '#0A7E8C',
+    specialty: 'Indirect GTM',
+    bias: `Believes indirect GTM beats direct at scale in mature markets. Always asks: "Who already has your buyer's trust and sees them every quarter?" Champions resellers, system integrators, technology partners, and ecosystem plays. Will challenge anyone who assumes direct sales is the only path. Core conviction: the best lead is a warm introduction from a trusted advisor.`,
+    method: `1. Map the ecosystem: who else sells to your ICP and isn't a competitor? 2. Identify 3–5 potential referral partners and test with a 90-day pilot. 3. Build a co-sell playbook with clear rules of engagement. 4. Make it easy: give partners a one-pager, a demo script, and a deal registration process. 5. Measure: referrals per partner per quarter, and partner-sourced pipeline %.`,
   },
   {
-    id: 'sacks', name: 'David Sacks', initials: 'DS', color: '#555555',
-    role: 'Operating Cadence & Bottom-Up SaaS', tag: 'Craft Ventures / Yammer',
-    framework: `Two contributions: (1) The Cadence — synchronizing Sales, Finance, Product, Marketing on quarterly operating rhythm. (2) Bottom-Up SaaS — combining consumer-style viral adoption with enterprise monetization, pioneered at Yammer (sold to Microsoft for $1.2B). Founding COO of PayPal. Runs Craft Ventures.`,
-    voice: `Operational and systems-thinking. "Without the cadence, scaling creates chaos." Asks the critical product question: "does an individual user get value alone, or does it require organizational commitment?" Will challenge anyone who tries to force PLG on a product that requires enterprise setup. Pragmatic about distinguishing genuine bottom-up products from wishful thinking.`,
+    id: 'community_builder',
+    name: 'The Community-Led Growth Expert',
+    initials: 'CB', color: '#7C5CBF',
+    specialty: 'Bottoms-Up Adoption',
+    bias: `Believes word-of-mouth and champion networks beat any paid channel in tight-knit industries. Always asks: "Who are your 10 most passionate users, and what would make them talk about you?" Champions bottom-up adoption, user communities, and reference-selling. Will challenge anyone who leads with top-down sales without building grassroots champions first.`,
+    method: `1. Identify the 10 most engaged customers and make them VIP advisors. 2. Create a community space (Slack group, LinkedIn group, or forum) for your ICP. 3. Give champions a reason to talk — early access, co-creation, public recognition. 4. Build a customer reference program with 5 referenceable customers before scaling sales. 5. Measure: community-sourced leads, NPS, and referral rate.`,
+  },
+  {
+    id: 'field_sales_director',
+    name: 'The Enterprise Field Sales Director',
+    initials: 'FS', color: '#8B6914',
+    specialty: 'Complex B2B Sales',
+    bias: `30-year veteran of complex, multi-stakeholder sales. Always asks: "Who is the economic buyer, and do you have a champion with power?" Believes enterprise deals die in the buying committee, not in the pitch. Champions multi-threading, procurement navigation, and executive alignment. Will challenge anyone who pitches to the champion without mapping the full buying committee.`,
+    method: `1. Map the full buying committee: Economic Buyer, Champion, Technical Evaluator, Blocker. 2. Qualify hard on MEDDIC or SPICED — exit fast if there's no champion with power. 3. Build the business case for the economic buyer — not the feature list. 4. Multi-thread from day one — never rely on a single point of contact. 5. Nail the mutual action plan: both sides own next steps.`,
+  },
+  {
+    id: 'analyst_advisor',
+    name: 'The Industry Analyst',
+    initials: 'IA', color: '#6B21A8',
+    specialty: 'Market Framing & Analyst Relations',
+    bias: `Believes category creation is the ultimate GTM moat — own the frame and you own the market. Always asks: "How does your product fit into the analyst narrative, and are you defining the category or being defined by it?" Champions Gartner/Forrester positioning, thought leadership, and the power of being the company that invented the category name buyers search for.`,
+    method: `1. Research whether your category already exists in analyst reports (Gartner, Forrester, G2). 2. If not, write the category definition yourself — publish it, speak it, live it. 3. Build relationships with 2–3 relevant analysts before you need them. 4. Create the "market sizing" and "buyer's guide" content that analysts reference. 5. Measure: how often does your company appear in category conversations?`,
   },
 ];
 
 const TOPICS = [
-  {
-    id: 't1', cat: 'Outbound',
-    title: 'Cold outbound to industrial SMEs',
-    q: 'What does effective cold outreach look like for Opero? What channels, messaging frameworks, targeting signals, and email/LinkedIn sequences actually work when trying to reach service managers and plant directors at manufacturing companies who are not actively searching for software?'
-  },
-  {
-    id: 't2', cat: 'Demand Gen',
-    title: 'LinkedIn as the primary lead engine',
-    q: 'Should founder-led LinkedIn content replace or supplement traditional outbound for Opero? How do you build an engaged industrial audience, what content converts awareness into pipeline, and how do you avoid the "lots of likes, no demos" trap?'
-  },
-  {
-    id: 't3', cat: 'Outbound',
-    title: 'Trigger-based prospecting',
-    q: 'How should Opero identify and act on companies at the exact moment of highest pain — retirements of key experts, plant expansions, industrial accidents, compliance deadlines? What are the signals, how do you find them, and what does outreach at that moment look like?'
-  },
-  {
-    id: 't4', cat: 'Events',
-    title: 'Trade shows and in-person events',
-    q: 'What is the right role for industrial trade shows and in-person events in Opero\'s lead generation strategy? How do you calculate ROI, what does a great event playbook look like, and how do you convert event conversations into pipeline for an offline-first industry?'
-  },
-  {
-    id: 't5', cat: 'ABM',
-    title: 'Account-Based Marketing (ABM)',
-    q: 'Should Opero implement ABM, and at what stage? Which accounts to prioritize, how to orchestrate multi-channel outreach across email, LinkedIn, and events, and how do you measure ABM success in a small and specific total addressable market like Danish manufacturing?'
-  },
-  {
-    id: 't6', cat: 'Partnerships',
-    title: 'Partner and channel-led lead generation',
-    q: 'How should Opero leverage industrial equipment vendors, service consultants, ERP implementers, and other channel partners as lead generation engines? What does a partner program look like for a vertical AI SaaS at this stage, and how do you avoid giving up margin without getting leads?'
-  },
-  {
-    id: 't7', cat: 'Inbound',
-    title: 'Inbound and content marketing for offline buyers',
-    q: 'Can SEO, content marketing, and inbound work for Opero\'s buyers — plant managers and service managers who typically don\'t start their search online? What content strategy would actually generate qualified pipeline from industrial decision-makers, and is it worth investing in now?'
-  },
-  {
-    id: 't8', cat: 'Referrals',
-    title: 'Referral programs and customer advocacy',
-    q: 'How do you systematically generate referrals in a tight-knit industrial community? What referral program structure, incentive design, and customer advocacy mechanics would work for Opero — and at what ARR level do you invest in a formal program?'
-  },
-  {
-    id: 't9', cat: 'Outbound',
-    title: 'Email sequences and outreach cadence',
-    q: 'What is the optimal cold outbound email strategy for Opero? How many touches, which channels to combine (email + LinkedIn + phone), what messaging frameworks, how to personalize at scale, and when does it make sense to stop a sequence and move on?'
-  },
-  {
-    id: 't10', cat: 'Team',
-    title: 'When to hire the first SDR or BDR',
-    q: 'When should Opero hire its first dedicated sales development rep, and what should that person actually spend their time doing? What metrics, playbook maturity, and pipeline predictability must exist before delegating top-of-funnel away from the founders?'
-  },
-  {
-    id: 't11', cat: 'Strategy',
-    title: 'Outbound vs. demand gen: where to invest first',
-    q: 'Opero has limited resources. Should the first real GTM investment go into building a systematic outbound motion (SDR, sequences, targeting) or into demand generation (LinkedIn content, events, thought leadership)? How do you decide, and what does "enough pipeline" look like to validate the bet?'
-  },
-  {
-    id: 't12', cat: 'ICP',
-    title: 'Defining and reaching the true ICP',
-    q: 'Who is Opero\'s exact ICP for outreach purposes — what company size, industry sub-vertical, title, trigger event, and buying context makes someone a high-probability lead? How do you validate your ICP hypothesis and build an outreach strategy around it when you have only a handful of customers?'
-  },
+  { id: 't1', cat: 'Outbound', title: 'Cold outbound strategy', q: 'What does an effective cold outreach strategy look like for this business? What channels, targeting signals, messaging frameworks, and sequences would actually generate pipeline — given the specific buyer profile and industry?' },
+  { id: 't2', cat: 'Demand Gen', title: 'LinkedIn & founder-led demand generation', q: 'Should founder-led LinkedIn content be the primary demand engine? How do you build an engaged audience among the right buyers, convert awareness into pipeline, and avoid the "lots of engagement, no demos" trap?' },
+  { id: 't3', cat: 'Outbound', title: 'Trigger-based prospecting', q: 'How should this business identify and act on companies at the exact moment of highest pain? What are the trigger events (hires, funding, expansion, compliance), how do you find them, and what does outreach at that moment look like?' },
+  { id: 't4', cat: 'Events', title: 'Trade shows and in-person events', q: 'What role should in-person events play in the lead generation strategy? How do you calculate ROI, build the event playbook, and convert conversations into pipeline for buyers who are hard to reach digitally?' },
+  { id: 't5', cat: 'ABM', title: 'Account-Based Marketing (ABM)', q: 'Should this business run ABM, and at what stage? Which accounts to prioritise, how to orchestrate multi-channel outreach, and how to measure ABM success when the total addressable market is focused and finite?' },
+  { id: 't6', cat: 'Partnerships', title: 'Partner and channel-led lead generation', q: 'How should this business leverage channel partners, consultants, integrators, and ecosystem players as lead sources? What does a partner program look like at this stage, and how do you avoid giving away margin without getting leads?' },
+  { id: 't7', cat: 'Inbound', title: 'Inbound and content marketing', q: 'Can SEO, content marketing, and inbound realistically generate qualified pipeline for this business and buyer profile? What content strategy would work, and is it worth investing in now versus other channels?' },
+  { id: 't8', cat: 'Referrals', title: 'Referral programs and customer advocacy', q: 'How do you systematically generate referrals from existing customers? What program structure, incentives, and advocacy mechanics would work — and at what stage of ARR does it make sense to invest in this?' },
+  { id: 't9', cat: 'Outbound', title: 'Email sequences and outreach cadence', q: 'What is the optimal outbound email and multi-touch cadence? How many touches, which channels to combine, what messaging, how to personalise at scale, and when to stop a sequence and move on?' },
+  { id: 't10', cat: 'Team', title: 'When to hire the first SDR or BDR', q: 'When should this business hire its first dedicated sales development rep, and what should they actually do? What playbook maturity, pipeline predictability, and unit economics must exist before delegating top-of-funnel from the founders?' },
+  { id: 't11', cat: 'Strategy', title: 'Outbound vs. demand gen: where to invest first', q: 'With limited resources, should the first real GTM investment go into systematic outbound or demand generation? How do you make this call, what does a 90-day test look like, and what signal tells you the bet is working?' },
+  { id: 't12', cat: 'ICP', title: 'Defining the true ICP for outreach', q: 'Who exactly is the ICP for outreach purposes — what firmographic profile, title, trigger event, and buying context makes someone a high-probability lead? How do you validate the hypothesis and build a list when you have only a handful of customers?' },
+  { id: 't13', cat: 'PLG', title: 'Product-led vs. sales-led motion', q: 'Should this business build a product-led growth wedge, go fully sales-led, or run a hybrid motion? What are the criteria for the decision, and what does each path look like in terms of team, spend, and timeline to first repeatable revenue?' },
+  { id: 't14', cat: 'Positioning', title: 'Positioning and category ownership', q: 'How should this business position itself to make the value immediately obvious to buyers? What category should it own, what are the competitive alternatives buyers currently use, and how does positioning change the outreach and sales narrative?' },
 ];
 
 // ────────────────────────────────────────────────────────────
@@ -766,6 +629,7 @@ const TOPICS = [
 
 let selected = new Set();
 let activeTopic = null;
+let businessCtx = '';
 let history = [];
 let roundNum = 0;
 let busy = false;
@@ -775,20 +639,17 @@ let busy = false;
 // ────────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderStrategists();
+  renderPersonas();
   renderTopics();
 
   // Restore API key
-  const saved = localStorage.getItem('opero-api-key');
+  const saved = localStorage.getItem('gtm-fishbowl-key');
   if (saved) {
     document.getElementById('apiKey').value = saved;
-    setDot(saved.startsWith('sk-ant-'));
   }
 
   document.getElementById('apiKey').addEventListener('input', e => {
-    const v = e.target.value.trim();
-    localStorage.setItem('opero-api-key', v);
-    setDot(v.startsWith('sk-ant-'));
+    localStorage.setItem('gtm-fishbowl-key', e.target.value.trim());
     refresh();
   });
 
@@ -796,22 +657,62 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter') addCustom();
   });
 
+  // Hide API key widget when running on server
+  if (onServer()) {
+    document.getElementById('apiWidget').style.display = 'none';
+  }
+
   refresh();
 });
 
 // ────────────────────────────────────────────────────────────
-// RENDER
+// BUSINESS CONTEXT
 // ────────────────────────────────────────────────────────────
 
-function renderStrategists() {
-  document.getElementById('sList').innerHTML = STRATEGISTS.map(s => `
-    <div class="s-item" id="si-${s.id}" onclick="toggleS('${s.id}')">
-      <div class="s-av" style="background:${s.color}">${s.initials}</div>
+function onCtxChange() {
+  const val = document.getElementById('ctxInput').value;
+  businessCtx = val.trim();
+  const words = businessCtx ? businessCtx.split(/\s+/).filter(Boolean).length : 0;
+  const countEl = document.getElementById('ctxCount');
+  countEl.textContent = `${words} word${words !== 1 ? 's' : ''}`;
+  countEl.className = 'ctx-count' + (words >= 30 ? ' ok' : '');
+  document.getElementById('ctxInput').className = 'ctx-textarea' + (words >= 30 ? ' filled' : '');
+  refresh();
+}
+
+function handleFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    const text = e.target.result;
+    document.getElementById('ctxInput').value = text;
+    onCtxChange();
+  };
+
+  // Read as text for .txt and .md; warn for PDF
+  if (file.name.endsWith('.pdf')) {
+    alert('PDF text extraction is limited in the browser. For best results, open your PDF, select all text (Cmd+A), copy, and paste it into the text area above.');
+    return;
+  }
+
+  reader.readAsText(file);
+}
+
+// ────────────────────────────────────────────────────────────
+// RENDER PERSONAS & TOPICS
+// ────────────────────────────────────────────────────────────
+
+function renderPersonas() {
+  document.getElementById('sList').innerHTML = PERSONAS.map(p => `
+    <div class="s-item" id="si-${p.id}" onclick="toggleS('${p.id}')">
+      <div class="s-av" style="background:${p.color}">${p.initials}</div>
       <div class="s-info">
-        <div class="s-name">${s.name}</div>
-        <div class="s-role">${s.role}</div>
+        <div class="s-name">${p.name}</div>
+        <div class="s-role">${p.specialty}</div>
       </div>
-      <div class="s-cb" id="cb-${s.id}"></div>
+      <div class="s-cb" id="cb-${p.id}"></div>
     </div>
   `).join('');
 }
@@ -826,7 +727,7 @@ function renderTopics() {
 }
 
 // ────────────────────────────────────────────────────────────
-// STRATEGIST SELECTION
+// PERSONA SELECTION
 // ────────────────────────────────────────────────────────────
 
 function toggleS(id) {
@@ -837,7 +738,7 @@ function toggleS(id) {
 }
 
 function selectAll() {
-  STRATEGISTS.forEach(s => { selected.add(s.id); document.getElementById(`si-${s.id}`).classList.add('on'); });
+  PERSONAS.forEach(p => { selected.add(p.id); document.getElementById(`si-${p.id}`).classList.add('on'); });
   document.getElementById('selCount').textContent = `${selected.size} selected`;
   refresh();
 }
@@ -878,38 +779,37 @@ function addCustom() {
 // UI STATE
 // ────────────────────────────────────────────────────────────
 
-function setDot(ok) {
-  document.getElementById('apiDot').className = 'api-dot' + (ok ? ' ok' : '');
-}
-
-function getKey() {
-  return document.getElementById('apiKey').value.trim();
-}
-
+function getKey() { return document.getElementById('apiKey').value.trim(); }
 function keyValid(k) { return k.startsWith('sk-') && k.length > 20; }
+function onServer() { return window.location.protocol !== 'file:'; }
+function ctxValid() { return businessCtx.split(/\s+/).filter(Boolean).length >= 30; }
 
 function refresh() {
-  const key = getKey();
-  const hasKey = keyValid(key);
+  const hasKey = onServer() || keyValid(getKey());
+  const hasCtx = ctxValid();
   const hasS = selected.size >= 2;
   const hasT = !!activeTopic;
-  const ok = hasKey && hasS && hasT && !busy;
+  const ok = hasKey && hasCtx && hasS && hasT && !busy;
 
   document.getElementById('launchBtn').disabled = !ok;
-  setDot(hasKey);
+  const dot = document.getElementById('apiDot');
+  if (dot) dot.className = 'api-dot' + (hasKey ? ' ok' : '');
 
   const meta = document.getElementById('launchMeta');
-  if (!hasKey) {
+  if (!hasKey && !onServer()) {
     meta.textContent = '⚠ Add your Anthropic API key (top right)';
     meta.style.color = '#FF5500';
+  } else if (!hasCtx) {
+    meta.textContent = '⚠ Describe your business in Step 0 (30+ words)';
+    meta.style.color = '#FF5500';
   } else if (!hasS) {
-    meta.textContent = '⚠ Select at least 2 strategists';
+    meta.textContent = '⚠ Select at least 2 personas';
     meta.style.color = '#FF5500';
   } else if (!hasT) {
     meta.textContent = '⚠ Choose a discussion topic';
     meta.style.color = '#FF5500';
   } else {
-    meta.textContent = `${selected.size} strategists · ${activeTopic.title}`;
+    meta.textContent = `${selected.size} personas · ${activeTopic.title}`;
     meta.style.color = '';
   }
 }
@@ -927,17 +827,20 @@ async function launch() {
   document.getElementById('emptyState').style.display = 'none';
   document.getElementById('discussContent').style.display = 'block';
 
+  // Show truncated business context in discussion pane
+  const display = businessCtx.length > 400 ? businessCtx.slice(0, 400) + '...' : businessCtx;
+  document.getElementById('ctxDisplay').textContent = display;
+
   renderDiscussHd();
   document.getElementById('feed').innerHTML = '';
-
   showLoading();
   refresh();
 
-  const userMsg = `FISHBOWL DISCUSSION TOPIC: ${activeTopic.title}
+  const userMsg = `FISHBOWL TOPIC: ${activeTopic.title}
 
 QUESTION: ${activeTopic.q}
 
-This is Round 1. Generate the opening perspectives from all selected strategists.`;
+This is Round 1. Generate the opening perspectives from all selected personas.`;
 
   history.push({ role: 'user', content: userMsg });
 
@@ -967,13 +870,13 @@ async function sendFollowUp() {
   busy = true;
   roundNum++;
   inp.value = '';
-  document.getElementById('sendBtn').disabled = true;
 
-  // Hide follow-up UI
+  const sendBtn = document.getElementById('sendBtn');
+  if (sendBtn) sendBtn.disabled = true;
+
   const fu = document.getElementById('followupEl');
   if (fu) fu.classList.remove('in');
 
-  // Divider
   const div = document.createElement('div');
   div.className = 'round-div';
   div.innerHTML = `
@@ -987,7 +890,7 @@ async function sendFollowUp() {
 
   const userMsg = `FOLLOW-UP QUESTION (Round ${roundNum}): ${q}
 
-Continue the fishbowl. Each strategist responds to this follow-up, building on or challenging the previous round.`;
+Continue the fishbowl. Each persona responds to this follow-up, building on or challenging the previous round.`;
 
   history.push({ role: 'user', content: userMsg });
 
@@ -1002,7 +905,8 @@ Continue the fishbowl. Each strategist responds to this follow-up, building on o
   }
 
   busy = false;
-  document.getElementById('sendBtn') && (document.getElementById('sendBtn').disabled = false);
+  const btn = document.getElementById('sendBtn');
+  if (btn) btn.disabled = false;
   refresh();
 }
 
@@ -1011,74 +915,76 @@ Continue the fishbowl. Each strategist responds to this follow-up, building on o
 // ────────────────────────────────────────────────────────────
 
 function buildSystem() {
-  const strategists = STRATEGISTS.filter(s => selected.has(s.id));
+  const personas = PERSONAS.filter(p => selected.has(p.id));
 
-  return `You are facilitating a live GTM fishbowl discussion for Opero — an AI knowledge management platform for industrial and manufacturing companies.
+  return `You are facilitating a live GTM fishbowl debate. Your job is to generate authentic, high-quality arguments from each selected GTM archetype, applied specifically to the user's business context.
 
-OPERO COMPANY CONTEXT:
-- Product: Captures expert knowledge from retiring/leaving engineers and technicians, makes it instantly accessible via AI chat for field workers
-- Buyers: Service Manager, Plant Director, Operations Manager at manufacturing companies
-- Target market: SMEs 100–1000 employees, industrial/manufacturing, Denmark first, then Europe
-- Value prop: 3× faster answers, 40% less unplanned downtime, ROI visible from week one
-- Stage: Early traction, founder-led sales, building first repeatable sales motion
-- Founders: Allan Thorvaldsen (CEO) and Mircea — currently selling personally
+BUSINESS CONTEXT (provided by the user):
+"""
+${businessCtx}
+"""
 
 YOUR ROLE:
-Generate a high-quality, authentic fishbowl discussion. Each strategist must speak in their distinctive voice and apply their real frameworks to Opero's specific situation. Be specific, tactical, and create genuine intellectual tension between strategists.
+Generate a sharp, opinionated fishbowl discussion. Each persona must:
+- Speak as their archetype, not as a generic consultant
+- Apply their specific methodology and bias to the user's actual business context
+- Be specific and tactical — reference details from the business context above
+- Create genuine tension with other personas where their methodologies conflict
+- Avoid generic advice that could apply to any company
 
-SELECTED STRATEGISTS — THEIR FRAMEWORKS AND VOICES:
-${strategists.map(s => `
---- ${s.name} (id: ${s.id}, initials: ${s.initials}, color: ${s.color}) ---
-Role: ${s.role} | ${s.tag}
-Framework: ${s.framework}
-Voice/style: ${s.voice}
+SELECTED PERSONAS:
+${personas.map(p => `
+--- ${p.name} (id: ${p.id}, initials: ${p.initials}, color: ${p.color}) ---
+Specialty: ${p.specialty}
+Core bias: ${p.bias}
+Methodology: ${p.method}
 `).join('\n')}
 
 RESPONSE FORMAT:
-Return ONLY valid JSON. No markdown fences, no text before or after. Use this exact structure:
+Return ONLY valid JSON. No markdown fences, no explanation outside the JSON. Exact structure:
 
 {
-  "strategists": [
+  "personas": [
     {
       "id": "exact_id_from_above",
-      "name": "Full Name",
+      "name": "The Persona Name",
       "initials": "XX",
       "color": "#HEXCOLOR",
-      "role": "their role",
-      "perspective": "Their full response — minimum 3 sentences, written in their authentic voice. Apply their framework to Opero's situation. Be specific and tactical. Use **bold** for emphasis. Do NOT be generic — reference Opero's industrial buyers, Allan's situation, the Denmark market, etc.",
-      "tactic": "One specific, concrete, immediately actionable recommendation for Opero. Should be measurable. NOT generic advice.",
-      "challenge": "One sentence: who they agree with, challenge, or build on, and why. Creates productive tension."
+      "specialty": "their specialty",
+      "perspective": "Their response — minimum 3 sentences in their archetype voice. Apply their methodology to the user's specific business. Use **bold** for key points. Reference details from the business context. NOT generic advice.",
+      "tactic": "One specific, concrete, immediately actionable recommendation for this business. Measurable. Based on their methodology.",
+      "challenge": "One sentence: who they agree with, push back on, or build upon — and exactly why."
     }
   ],
-  "synthesis": "2-3 paragraphs synthesizing where the group converges, where they disagree, and the critical decision or tension Opero must resolve. Use **bold** for key insights. Be specific to this topic and Opero's context."
+  "synthesis": "2–3 paragraphs synthesising where personas converge, where they conflict, and the single most important decision this business must make on this topic. Use **bold** for critical insights. Tied to this specific business context."
 }
 
-IDs must match exactly: ${strategists.map(s => s.id).join(', ')}
-Colors must match exactly: ${strategists.map(s => `${s.id}:"${s.color}"`).join(', ')}
+IDs must match exactly: ${personas.map(p => p.id).join(', ')}
+Colors must match exactly: ${personas.map(p => `${p.id}:"${p.color}"`).join(', ')}
 
-Make it feel like a real room of sharp, opinionated experts who genuinely disagree on some things.`;
+Create real intellectual tension. Make personas disagree where their methodologies genuinely conflict.`;
 }
 
 async function callClaude(system, messages) {
-  const resp = await fetch('https://api.anthropic.com/v1/messages', {
+  const useProxy = onServer();
+  const url = useProxy ? '/api/chat' : 'https://api.anthropic.com/v1/messages';
+
+  const headers = { 'content-type': 'application/json' };
+  if (!useProxy) {
+    headers['x-api-key'] = getKey();
+    headers['anthropic-version'] = '2023-06-01';
+    headers['anthropic-dangerous-direct-browser-access'] = 'true';
+  }
+
+  const resp = await fetch(url, {
     method: 'POST',
-    headers: {
-      'x-api-key': getKey(),
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true',
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: 'claude-opus-4-6',
-      max_tokens: 8000,
-      system,
-      messages,
-    }),
+    headers,
+    body: JSON.stringify({ model: 'claude-opus-4-6', max_tokens: 8000, system, messages }),
   });
 
   if (!resp.ok) {
     const err = await resp.json().catch(() => ({}));
-    throw new Error(err.error?.message || `API error ${resp.status}. Check your API key.`);
+    throw new Error(err.error?.message || `API error ${resp.status}`);
   }
 
   const data = await resp.json();
@@ -1090,15 +996,15 @@ async function callClaude(system, messages) {
 // ────────────────────────────────────────────────────────────
 
 function renderDiscussHd() {
-  const strats = STRATEGISTS.filter(s => selected.has(s.id));
+  const personas = PERSONAS.filter(p => selected.has(p.id));
   document.getElementById('discussHd').innerHTML = `
-    <div class="discuss-label">Fishbowl Discussion</div>
-    <div class="discuss-title">${activeTopic.title}</div>
+    <div class="discuss-label">Fishbowl Debate</div>
+    <div class="discuss-title">${escHtml(activeTopic.title)}</div>
     <div class="chips">
-      ${strats.map(s => `
+      ${personas.map(p => `
         <div class="chip">
-          <div class="chip-av" style="background:${s.color}">${s.initials}</div>
-          <span class="chip-name">${s.name.split(' ')[0]}</span>
+          <div class="chip-av" style="background:${p.color}">${p.initials}</div>
+          <span class="chip-name">${escHtml(p.name.replace('The ', ''))}</span>
         </div>
       `).join('')}
     </div>
@@ -1108,7 +1014,7 @@ function renderDiscussHd() {
 function showLoading() {
   const el = document.createElement('div');
   el.className = 'loading'; el.id = 'loadEl';
-  el.innerHTML = `<div class="spinner"></div><p>The strategists are deliberating...</p>`;
+  el.innerHTML = `<div class="spinner"></div><p>The archetypes are deliberating...</p>`;
   document.getElementById('feed').appendChild(el);
   el.scrollIntoView({ behavior: 'smooth', block: 'end' });
 }
@@ -1131,64 +1037,57 @@ function renderRound(jsonText, round) {
     const m = jsonText.match(/\{[\s\S]*\}/);
     data = JSON.parse(m ? m[0] : jsonText);
   } catch {
-    showErr('Could not parse the strategist responses. Please try again.');
+    showErr('Could not parse responses. Please try again.');
     return;
   }
 
   const feed = document.getElementById('feed');
-  const strats = data.strategists || [];
+  const personas = data.personas || [];
 
-  strats.forEach((s, i) => {
+  personas.forEach((p, i) => {
     const card = document.createElement('div');
     card.className = 's-card';
     card.innerHTML = `
       <div class="s-card-meta">
-        <div class="s-card-av" style="background:${s.color}">${s.initials}</div>
+        <div class="s-card-av" style="background:${p.color}">${p.initials}</div>
         <div>
-          <div class="s-card-name">${escHtml(s.name)}</div>
-          <div class="s-card-role">${escHtml(s.role || '')}</div>
+          <div class="s-card-name">${escHtml(p.name)}</div>
+          <div class="s-card-role">${escHtml(p.specialty || '')}</div>
         </div>
         <span class="round-badge">Round ${round}</span>
       </div>
-      <blockquote>${fmt(s.perspective)}</blockquote>
-      <div class="action-box">${escHtml(s.tactic || '')}</div>
-      ${s.challenge ? `<div class="challenge-line">${fmt(s.challenge)}</div>` : ''}
+      <blockquote>${fmt(p.perspective)}</blockquote>
+      <div class="action-box">${escHtml(p.tactic || '')}</div>
+      ${p.challenge ? `<div class="challenge-line">${fmt(p.challenge)}</div>` : ''}
     `;
     feed.appendChild(card);
     setTimeout(() => card.classList.add('in'), i * 180 + 50);
   });
 
-  // Synthesis
   if (data.synthesis) {
     const synth = document.createElement('div');
     synth.className = 'synth-card';
-    synth.innerHTML = `
-      <h3>Round ${round} — Synthesis</h3>
-      <p>${fmt(data.synthesis)}</p>
-    `;
+    synth.innerHTML = `<h3>Round ${round} — Synthesis</h3><p>${fmt(data.synthesis)}</p>`;
     feed.appendChild(synth);
     setTimeout(() => {
       synth.classList.add('in');
       synth.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, strats.length * 180 + 300);
+    }, personas.length * 180 + 300);
   }
 
-  // Follow-up
-  setTimeout(() => renderFollowUp(data), strats.length * 180 + 600);
+  setTimeout(() => renderFollowUp(), personas.length * 180 + 600);
 }
 
-function renderFollowUp(data) {
-  // Remove old follow-up if any
+function renderFollowUp() {
   const old = document.getElementById('followupEl');
   if (old) old.remove();
 
-  // Suggested questions
   const suggestions = [
-    'How would this apply with a marketing budget under €5,000/month?',
-    'What if the buyer is technically averse and doesn\'t use LinkedIn?',
-    'Which of these tactics would you prioritize in month 1?',
-    'How does this change if Opero targets Germany instead of Denmark?',
-    'What\'s the single most important metric to track this motion?',
+    'Which of these tactics would you prioritise in month 1?',
+    'What if the budget is under €3,000/month?',
+    'How does this change if the sales cycle is 6+ months?',
+    'What's the single metric that proves this motion is working?',
+    'How do you get the first 10 customers from zero?',
   ];
 
   const fu = document.createElement('div');
@@ -1196,9 +1095,7 @@ function renderFollowUp(data) {
   fu.innerHTML = `
     <div class="followup-label">Ask a Follow-up Question</div>
     <div class="followup-row">
-      <input class="followup-in" id="fupIn"
-        placeholder="e.g. How do you handle buyers who've never heard of AI knowledge management?"
-      />
+      <input class="followup-in" id="fupIn" placeholder="Push deeper — challenge an assumption, ask for a specific tactic, or explore a constraint..." />
       <button class="send-btn" id="sendBtn" onclick="sendFollowUp()">Send →</button>
     </div>
     <div class="suggest-row">
@@ -1222,10 +1119,6 @@ function setSuggest(btn) {
   if (inp) inp.value = btn.textContent;
 }
 
-// ────────────────────────────────────────────────────────────
-// UTILS
-// ────────────────────────────────────────────────────────────
-
 function fmt(text) {
   if (!text) return '';
   return escHtml(text).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
@@ -1233,11 +1126,7 @@ function fmt(text) {
 
 function escHtml(str) {
   if (!str) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 </script>
 </body>
