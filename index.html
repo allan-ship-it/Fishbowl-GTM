@@ -406,7 +406,7 @@
     <div class="hex"></div>
     <div class="header-title">
       <h1>GTM <span>Fishbowl</span></h1>
-      <p class="header-sub">Live AI debate with 12 GTM archetypes — powered by Claude</p>
+      <p class="header-sub">Live AI debate with 6 GTM archetypes — powered by Claude</p>
     </div>
   </div>
   <div class="api-widget" id="apiWidget">
@@ -452,32 +452,32 @@
           <span class="sel-count" id="selCount">0 selected</span>
         </div>
         <div class="s-list" id="sList">
-          <div class="s-item" id="si-positioning_consultant" onclick="toggleS('positioning_consultant')">
+          <div class="s-item" id="si-positioning_consultant" data-pid="positioning_consultant">
             <div class="s-av" style="background:#E8443A">PC</div>
             <div class="s-info"><div class="s-name">The Positioning Consultant</div><div class="s-role">Messaging &amp; Market Fit</div></div>
             <div class="s-cb" id="cb-positioning_consultant"></div>
           </div>
-          <div class="s-item" id="si-outbound_agency" onclick="toggleS('outbound_agency')">
+          <div class="s-item" id="si-outbound_agency" data-pid="outbound_agency">
             <div class="s-av" style="background:#D4A017">OA</div>
             <div class="s-info"><div class="s-name">The Outbound Sales Agency</div><div class="s-role">Cold Outreach &amp; Pipeline</div></div>
             <div class="s-cb" id="cb-outbound_agency"></div>
           </div>
-          <div class="s-item" id="si-plg_studio" onclick="toggleS('plg_studio')">
+          <div class="s-item" id="si-plg_studio" data-pid="plg_studio">
             <div class="s-av" style="background:#C73866">PG</div>
             <div class="s-info"><div class="s-name">The PLG Growth Studio</div><div class="s-role">Product-Led Growth</div></div>
             <div class="s-cb" id="cb-plg_studio"></div>
           </div>
-          <div class="s-item" id="si-vc_operator" onclick="toggleS('vc_operator')">
+          <div class="s-item" id="si-vc_operator" data-pid="vc_operator">
             <div class="s-av" style="background:#1A8754">VC</div>
             <div class="s-info"><div class="s-name">The VC-Backed Operator</div><div class="s-role">Scale &amp; Unit Economics</div></div>
             <div class="s-cb" id="cb-vc_operator"></div>
           </div>
-          <div class="s-item" id="si-demand_gen_agency" onclick="toggleS('demand_gen_agency')">
+          <div class="s-item" id="si-demand_gen_agency" data-pid="demand_gen_agency">
             <div class="s-av" style="background:#7B2FBE">DG</div>
             <div class="s-info"><div class="s-name">The Demand Gen Agency</div><div class="s-role">Paid &amp; Content Distribution</div></div>
             <div class="s-cb" id="cb-demand_gen_agency"></div>
           </div>
-          <div class="s-item" id="si-pricing_specialist" onclick="toggleS('pricing_specialist')">
+          <div class="s-item" id="si-pricing_specialist" data-pid="pricing_specialist">
             <div class="s-av" style="background:#3B7DD8">PS</div>
             <div class="s-info"><div class="s-name">The SaaS Pricing Specialist</div><div class="s-role">Monetisation &amp; Packaging</div></div>
             <div class="s-cb" id="cb-pricing_specialist"></div>
@@ -489,20 +489,20 @@
       <div class="section">
         <div class="section-hd">2 — Choose Topic</div>
         <div class="t-list" id="tList">
-          <div class="t-item" id="ti-t1" onclick="pickTopic('t1')"><div class="t-cat">Outbound</div><div class="t-title">Cold outbound strategy</div></div>
-          <div class="t-item" id="ti-t2" onclick="pickTopic('t2')"><div class="t-cat">Demand Gen</div><div class="t-title">LinkedIn &amp; founder-led demand generation</div></div>
-          <div class="t-item" id="ti-t3" onclick="pickTopic('t3')"><div class="t-cat">Outbound</div><div class="t-title">Trigger-based prospecting</div></div>
-          <div class="t-item" id="ti-t4" onclick="pickTopic('t4')"><div class="t-cat">Events</div><div class="t-title">Trade shows and in-person events</div></div>
-          <div class="t-item" id="ti-t5" onclick="pickTopic('t5')"><div class="t-cat">ABM</div><div class="t-title">Account-Based Marketing (ABM)</div></div>
-          <div class="t-item" id="ti-t6" onclick="pickTopic('t6')"><div class="t-cat">Partnerships</div><div class="t-title">Partner and channel-led lead generation</div></div>
-          <div class="t-item" id="ti-t7" onclick="pickTopic('t7')"><div class="t-cat">Inbound</div><div class="t-title">Inbound and content marketing</div></div>
-          <div class="t-item" id="ti-t8" onclick="pickTopic('t8')"><div class="t-cat">Referrals</div><div class="t-title">Referral programs and customer advocacy</div></div>
-          <div class="t-item" id="ti-t9" onclick="pickTopic('t9')"><div class="t-cat">Outbound</div><div class="t-title">Email sequences and outreach cadence</div></div>
-          <div class="t-item" id="ti-t10" onclick="pickTopic('t10')"><div class="t-cat">Team</div><div class="t-title">When to hire the first SDR or BDR</div></div>
-          <div class="t-item" id="ti-t11" onclick="pickTopic('t11')"><div class="t-cat">Strategy</div><div class="t-title">Outbound vs. demand gen: where to invest first</div></div>
-          <div class="t-item" id="ti-t12" onclick="pickTopic('t12')"><div class="t-cat">ICP</div><div class="t-title">Defining the true ICP for outreach</div></div>
-          <div class="t-item" id="ti-t13" onclick="pickTopic('t13')"><div class="t-cat">PLG</div><div class="t-title">Product-led vs. sales-led motion</div></div>
-          <div class="t-item" id="ti-t14" onclick="pickTopic('t14')"><div class="t-cat">Positioning</div><div class="t-title">Positioning and category ownership</div></div>
+          <div class="t-item" id="ti-t1" data-tid="t1"><div class="t-cat">Outbound</div><div class="t-title">Cold outbound strategy</div></div>
+          <div class="t-item" id="ti-t2" data-tid="t2"><div class="t-cat">Demand Gen</div><div class="t-title">LinkedIn &amp; founder-led demand generation</div></div>
+          <div class="t-item" id="ti-t3" data-tid="t3"><div class="t-cat">Outbound</div><div class="t-title">Trigger-based prospecting</div></div>
+          <div class="t-item" id="ti-t4" data-tid="t4"><div class="t-cat">Events</div><div class="t-title">Trade shows and in-person events</div></div>
+          <div class="t-item" id="ti-t5" data-tid="t5"><div class="t-cat">ABM</div><div class="t-title">Account-Based Marketing (ABM)</div></div>
+          <div class="t-item" id="ti-t6" data-tid="t6"><div class="t-cat">Partnerships</div><div class="t-title">Partner and channel-led lead generation</div></div>
+          <div class="t-item" id="ti-t7" data-tid="t7"><div class="t-cat">Inbound</div><div class="t-title">Inbound and content marketing</div></div>
+          <div class="t-item" id="ti-t8" data-tid="t8"><div class="t-cat">Referrals</div><div class="t-title">Referral programs and customer advocacy</div></div>
+          <div class="t-item" id="ti-t9" data-tid="t9"><div class="t-cat">Outbound</div><div class="t-title">Email sequences and outreach cadence</div></div>
+          <div class="t-item" id="ti-t10" data-tid="t10"><div class="t-cat">Team</div><div class="t-title">When to hire the first SDR or BDR</div></div>
+          <div class="t-item" id="ti-t11" data-tid="t11"><div class="t-cat">Strategy</div><div class="t-title">Outbound vs. demand gen: where to invest first</div></div>
+          <div class="t-item" id="ti-t12" data-tid="t12"><div class="t-cat">ICP</div><div class="t-title">Defining the true ICP for outreach</div></div>
+          <div class="t-item" id="ti-t13" data-tid="t13"><div class="t-cat">PLG</div><div class="t-title">Product-led vs. sales-led motion</div></div>
+          <div class="t-item" id="ti-t14" data-tid="t14"><div class="t-cat">Positioning</div><div class="t-title">Positioning and category ownership</div></div>
         </div>
         <div style="margin-top:10px;">
           <div class="t-cat" style="margin-bottom:4px;">Custom Topic</div>
@@ -678,6 +678,18 @@ function init() {
     if (e.key === 'Enter') addCustom();
   });
 
+  // Event delegation for persona selection — catches clicks on any child element
+  document.getElementById('sList').addEventListener('click', function(e) {
+    const item = e.target.closest('[data-pid]');
+    if (item) toggleS(item.dataset.pid);
+  });
+
+  // Event delegation for topic selection
+  document.getElementById('tList').addEventListener('click', function(e) {
+    const item = e.target.closest('[data-tid]');
+    if (item) pickTopic(item.dataset.tid);
+  });
+
   // Hide API key widget when running on server
   if (onServer()) {
     document.getElementById('apiWidget').style.display = 'none';
@@ -730,69 +742,6 @@ function handleFile(event) {
 }
 
 // ────────────────────────────────────────────────────────────
-// RENDER PERSONAS & TOPICS
-// ────────────────────────────────────────────────────────────
-
-function renderPersonas() {
-  var list = document.getElementById('sList');
-  if (!list) return;
-  list.innerHTML = '';
-  for (var i = 0; i < PERSONAS.length; i++) {
-    var p = PERSONAS[i];
-    var item = document.createElement('div');
-    item.className = 's-item';
-    item.id = 'si-' + p.id;
-    (function(pid) {
-      item.addEventListener('click', function() { toggleS(pid); });
-    })(p.id);
-    var av = document.createElement('div');
-    av.className = 's-av';
-    av.style.background = p.color;
-    av.textContent = p.initials;
-    var info = document.createElement('div');
-    info.className = 's-info';
-    var name = document.createElement('div');
-    name.className = 's-name';
-    name.textContent = p.name;
-    var role = document.createElement('div');
-    role.className = 's-role';
-    role.textContent = p.specialty;
-    info.appendChild(name);
-    info.appendChild(role);
-    var cb = document.createElement('div');
-    cb.className = 's-cb';
-    cb.id = 'cb-' + p.id;
-    item.appendChild(av);
-    item.appendChild(info);
-    item.appendChild(cb);
-    list.appendChild(item);
-  }
-}
-
-function renderTopics() {
-  var list = document.getElementById('tList');
-  if (!list) return;
-  list.innerHTML = '';
-  for (var i = 0; i < TOPICS.length; i++) {
-    var t = TOPICS[i];
-    var item = document.createElement('div');
-    item.className = 't-item';
-    item.id = 'ti-' + t.id;
-    (function(tid) {
-      item.addEventListener('click', function() { pickTopic(tid); });
-    })(t.id);
-    var cat = document.createElement('div');
-    cat.className = 't-cat';
-    cat.textContent = t.cat;
-    var title = document.createElement('div');
-    title.className = 't-title';
-    title.textContent = t.title;
-    item.appendChild(cat);
-    item.appendChild(title);
-    list.appendChild(item);
-  }
-}
-
 // ────────────────────────────────────────────────────────────
 // PERSONA SELECTION
 // ────────────────────────────────────────────────────────────
@@ -1160,7 +1109,7 @@ function renderFollowUp() {
     'Which of these tactics would you prioritise in month 1?',
     'What if the budget is under €3,000/month?',
     'How does this change if the sales cycle is 6+ months?',
-    'What's the single metric that proves this motion is working?',
+    "What's the single metric that proves this motion is working?",
     'How do you get the first 10 customers from zero?',
   ];
 
